@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+source $PWD/bin/core/utils.zsh
+
+for dotfile in $(find $PWD/symfiles -maxdepth 1 -name '*.symlink')
+do
+	dst="$HOME/.$(basename "${dotfile%.*}")"
+	if [[ ! -h $dst ]]
+	then
+		ln -s $dotfile $dst && echo_success "$dst Added" 
+	fi
+done
