@@ -10,3 +10,8 @@ do
 		ln -s $dotfile $dst && echo_success "$dst Added" 
 	fi
 done
+
+if [[ ! -d "$HOME/.powerline" ]]
+then
+	git clone https://github.com/Lokaltog/powerline $HOME/.powerline && echo_success "Powerline clone"
+fi
