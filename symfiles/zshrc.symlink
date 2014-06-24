@@ -18,10 +18,10 @@ HIST_IGNORE_SPACE="clear"
 
 # alias timenow="toilet -f wideterm `date +%T`"
 
-alias clock="tty-clock -bsC 4"
+alias clock="${DOTFILES}/bin/usr/tty-clock -bsC 4"
 alias mmysql="/Applications/MAMP/Library/bin/mysql"
-alias randomWallMBP='$DOTFILES/bin/usr/random-wallpaper -f "VG248" "VG248"'
-alias randomWalliMac='$DOTFILES/bin/usr/random-wallpaper -f "W2261" "iMac"'
+alias randomWallMBP="${DOTFILES}/bin/usr/random-wallpaper -f "VG248" "VG248""
+alias randomWalliMac="${DOTFILES}/bin/usr/random-wallpaper -f "W2261" "iMac""
 alias rezsh='exec $SHELL -l'
 
 ## Git Stuff
