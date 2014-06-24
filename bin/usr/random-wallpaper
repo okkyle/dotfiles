@@ -1,5 +1,7 @@
 #!/bin/bash
-## A little script that does REAL random wallpaper changing. Because the OSX's one sucks.
+# A little script that does REAL random wallpaper changing. Because the OSX's one sucks.
+# Basically it takes my wallpapers in my Dropbox, symlinks them into ~/Pictures/Wallpapers and then it rotates between them, pick a random wall and then delete it to avoid repetition in the future.
+# Best used as a crontab script
 
 force=false;
 
