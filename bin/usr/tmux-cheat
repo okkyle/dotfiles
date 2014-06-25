@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+export PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# export PWD="$( pwd )"
+source "$PWD/../core/utils.zsh"
+echo "${COLOR_RED}Do you really need that ?${COLOR_RESET}\n"
+echo "${COLOR_GREEN}Fine, here you go!" && /
+cat "$PWD/f/tmuxcheat.md"
