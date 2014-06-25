@@ -23,7 +23,7 @@ alias mmysql="/Applications/MAMP/Library/bin/mysql"
 alias randomWallMBP="${DOTFILES}/bin/usr/random-wallpaper -f "VG248" "VG248""
 alias randomWalliMac="${DOTFILES}/bin/usr/random-wallpaper -f "W2261" "iMac""
 alias rezsh='exec $SHELL -l'
-
+alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 ## Git Stuff
 alias groot='cd $(git rev-parse --show-cdup)'
 alias such=git
