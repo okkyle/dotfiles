@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-
+# Don't run this without running `runmah`
+ 
 source $PWD/bin/core/utils.zsh
 
 for dotfile in $(find $PWD/symfiles -maxdepth 1 -name '*.symlink')
@@ -14,4 +15,9 @@ done
 if [[ ! -d "$HOME/.powerline" ]]
 then
 	git clone https://github.com/Lokaltog/powerline $HOME/.powerline && echo_success "Powerline clone"
+fi
+
+if [[ ! -h "$HOME/.dotfiles" ]]
+then
+	ln -s $PWD ~/.dotfiles && echo_success "Dotfiles folder linked"
 fi
