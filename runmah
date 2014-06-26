@@ -6,4 +6,4 @@ source $PWD/bin/core/utils.zsh
 echo "${COLOR_YELLOW}GERONIMOOOOOO ε=ε=ε=ε=┏(;￣▽￣)┛${COLOR_RESET}"
 
 echo_info "Copying dotfiles" && $PWD/bin/core/symlinks && \
-echo_success "Done"
+echo_success "Dotfiles copied"
