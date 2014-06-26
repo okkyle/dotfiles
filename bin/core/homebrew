@@ -1,5 +1,5 @@
 # Shamelessly stolen from MoOx/dotfiles
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 if ! type "brew" > /dev/null
 then
