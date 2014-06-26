@@ -3,4 +3,4 @@
 source "$DOTFILES/bin/core/utils.zsh"
 echo "${COLOR_RED}Do you really need that ?${COLOR_RESET}\n"
 echo "${COLOR_GREEN}Fine, here you go!" && \
-cat "$DOTFILES/bin/usr/f/tmuxcheat.md"
+less "$DOTFILES/bin/usr/f/tmuxcheat.md"
