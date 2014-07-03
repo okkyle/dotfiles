@@ -18,10 +18,10 @@
 				"istime": true
 			}
 		}, {
-			"name": "hostname"
-		}, {
-			"name": "now_playing",
-			"args": { "player": "itunes" }
+			"name": "hostname",
+			"args": {
+				"exclude_domain": true
+			}
 		}],
 		"left": [{
 			"name": "user"
