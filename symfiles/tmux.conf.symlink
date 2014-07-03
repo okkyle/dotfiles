@@ -83,4 +83,4 @@ source "$HOME/.powerline/powerline/bindings/tmux/powerline.conf"
 
 if-shell '[ $TMUX_VERSION_MAJOR -gt 1 -o \( $TMUX_VERSION_MAJOR -eq 1 -a $TMUX_VERSION_MINOR -ge 8 \) ]' \
   "set -g status-left '#{?client_prefix,#[fg=colour254]#[bg=colour31]#[bold],#[fg=colour16]#[bg=colour254]#[bold]} #S #{?client_prefix,#[fg=colour31]#[bg=colour234]#[nobold],#[fg=colour254]#[bg=colour234]#[nobold]}#(eval $POWERLINE_COMMAND tmux left)'" \
-  "set -g status-left '#[fg=colour16,bg=colour254,bold] #S #[fg=colour254,bg=colour234,nobold]#(eval $POWERLINE_COMMAND tmux left)'"
+  "set -g status-left '#[fg=colour16,bg=colour254,bold] #S #[fg=colour254,bg=colour234,nobold]#(eval $POWERLINE_COMMAND tmux left)'"
