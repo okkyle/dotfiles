@@ -3,14 +3,25 @@
  
 source $PWD/bin/core/utils.zsh
 
+if [[ ! -d "$HOME/.config" ]]
+	then
+	mkdir "$HOME/.config"
+fi
+
+
 for dotfile in $(find $PWD/symfiles -maxdepth 1 -name '*.symlink')
 do
 	dst="$HOME/.$(basename "${dotfile%.*}")"
-	if [[ ! -h $dst ]]
-	then
-		ln -s $dotfile $dst && echo_success "$dst Added" 
+	
+	if [[ ! -h $dst && $(basename $dotfile) != "config.symlink" ]]
+		then
+		ln -s $dotfile $dst && echo_success "$dst Added"
+	elif [[ $(basename $dotfile) == "config.symlink" ]]
+		then
+		ln -s $dotfile/* "$HOME/.config/" && echo_success "Config folders added"
 	fi
 done
+
 
 if [[ ! -d "$HOME/.powerline" ]]
 then
