@@ -32,6 +32,7 @@ alias groot='cd $(git rev-parse --show-cdup)'
 alias such=git
 alias very=git
 alias wow='git status'
+alias gh=github
 alias dockutil="${DOTFILES}/bin/usr/dockutil"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
