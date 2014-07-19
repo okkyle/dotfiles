@@ -1,0 +1,43 @@
+[user]
+	email = damien.erambert@me.com
+	name = Damien Erambert
+[colors]
+	ui = true
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[merge]
+# Have a summary of the merged commits on merge
+	summary = true
+[push]
+	default = tracking
+[core]
+	excludesfile = /Users/Damien/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[pull]
+	rebase = true
+[diff]
+    # Use better prefixes than a or b for diff output
+    # c - commit (usually HEAD)
+    # i - index (staging area)
+    # w - working directory
+    mnemonicPrefix = true
+[alias]
+	# Show all local and remote branches
+	b = branch -avv
+	r = remote -vv
+	t = tag -l
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	# Remove a file from the staging area
+    unstage = reset HEAD
+    # Undo the latest commit
+    uncommit = reset --soft HEAD^
