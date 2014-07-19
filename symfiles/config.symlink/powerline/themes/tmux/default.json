@@ -22,9 +22,6 @@
 			"args": {
 				"exclude_domain": true
 			}
-		}],
-		"left": [{
-			"name": "user"
 		}]
 	}
 }
