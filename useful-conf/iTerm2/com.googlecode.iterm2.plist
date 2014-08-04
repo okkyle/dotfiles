@@ -720,7 +720,7 @@
 	<key>NSFontPanelPreviewHeight</key>
 	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents/dotfiles/useful-conf/iTerm2-color-scheme/iTerm2</string>
+	<string>~/Documents/dotfiles/useful-conf/iTerm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{959, 681}</string>
 	<key>NSNavPanelExpandedStateForSaveMode</key>
@@ -751,7 +751,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>470 324 445 270 0 0 1920 1058 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>119 437 924 485 0 0 1920 1058 </string>
+	<string>154 344 924 485 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>960 47 960 1011 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -1340,11 +1340,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>InputMono-Light 12</string>
+			<string>InputMono-ExtraLight 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InputMono-Light 12</string>
+			<string>InputMono-ExtraLight 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1510,7 +1510,7 @@
 			<key>Use Italic Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.2189215421676636</real>
+			<real>0.890083909034729</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -2297,7 +2297,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/Damien/Documents/dotfiles/useful-conf/iTerm2-color-scheme/iTerm2</string>
+	<string>/Users/Damien/Documents/dotfiles/useful-conf/iTerm2</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
