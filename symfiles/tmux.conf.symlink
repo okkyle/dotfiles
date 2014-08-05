@@ -1,7 +1,7 @@
 # Integrate with OS X pasteboard. Do:
 #   brew install reattach-to-user-namespace
 # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-if-shell "uname | grep -q Darwin" "set-option -g default-command 'reattach-to-user-namespace -l zsh'"
+set-option -g default-command 'reattach-to-user-namespace -l zsh'
 
 # Full color for Vim.
 set -g default-terminal "screen-256color"
