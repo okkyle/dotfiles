@@ -930,7 +930,7 @@
 	<key>NSFontPanelPreviewHeight</key>
 	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents/dotfiles/useful-conf/iTerm2-color-scheme</string>
+	<string>~</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{959, 681}</string>
 	<key>NSNavPanelExpandedStateForSaveMode</key>
@@ -961,9 +961,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>470 324 445 270 0 0 1920 1058 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>509 404 924 485 0 0 1920 1058 </string>
+	<string>368 490 924 485 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 56 1914 1002 0 0 1920 1058 </string>
+	<string>160 45 960 1012 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 47 1920 1011 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
@@ -1000,7 +1000,7 @@
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>Allow Title Reporting</key>
-			<false/>
+			<true/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -1150,15 +1150,15 @@
 			<key>Automatically Log</key>
 			<false/>
 			<key>BM Growl</key>
-			<true/>
+			<false/>
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.036636844277381897</real>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.036636844277381897</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.036636844277381897</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -1173,7 +1173,7 @@
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
-			<real>1.7248659133911133</real>
+			<real>15</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1706,7 +1706,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.17960891127586365</real>
+			<real>0.072059914469718933</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -1720,7 +1720,7 @@
 			<key>Use Italic Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>0.890083909034729</real>
+			<real>0.91387772560119629</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -2527,7 +2527,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-08-16T10:41:56Z</date>
+	<date>2014-08-23T13:19:04Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
