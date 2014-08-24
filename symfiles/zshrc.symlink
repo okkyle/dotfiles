@@ -34,6 +34,8 @@ alias very=git
 alias wow='git status'
 alias gh=github
 alias dockutil="${DOTFILES}/bin/usr/dockutil"
+alias subl="/Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl"
+alias st="subl"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -52,7 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx sublime git)
+plugins=(osx git)
 
 source $ZSH/oh-my-zsh.sh
 
