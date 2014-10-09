@@ -33,7 +33,7 @@ set-window-option -g window-status-current-fg black
 # bind-key x kill-pane
 # bind-key & kill-window
 
-# Swap windows (Ctrl+Shift+Left|Right)
+# Pressing Ctrl+Shift+Left (will move the current window to the left. Similarly right. No need to use the modifier (C-b).
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
 
