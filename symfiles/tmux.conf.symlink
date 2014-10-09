@@ -29,10 +29,6 @@ set -g status-left '#S'
 set-window-option -g window-status-current-bg yellow
 set-window-option -g window-status-current-fg black
 
-# Don't prompt to kill panes/windows.
-# bind-key x kill-pane
-# bind-key & kill-window
-
 # Pressing Ctrl+Shift+Left (will move the current window to the left. Similarly right. No need to use the modifier (C-b).
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
@@ -54,10 +50,6 @@ set -g mouse-select-window on
 # Splitting windows into panes with h and v
 bind-key h split-window -v
 bind-key v split-window -h
-
-# set first window to index 1 (not 0) to map more to the keyboard layout...
-set-option -g base-index 1
-set-window-option -g pane-base-index 1
 
 # color scheme (styled as vim-powerline)
 set -g status-left-length 52
