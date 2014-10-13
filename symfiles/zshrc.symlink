@@ -36,6 +36,9 @@ alias gh=github
 alias dockutil="${DOTFILES}/bin/usr/dockutil"
 alias subl="/Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl"
 alias st="subl"
+
+function gfiles () { grep "$1" -rn $2 }
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
