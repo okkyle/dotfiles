@@ -1,4 +1,5 @@
 #/bin/sh
+defaults write NSGlobalDomain AppleInterfaceStyle Light
 defaults write NSGlobalDomain AppleInterfaceStyle Dark
 killall Dock
 sleep 3
