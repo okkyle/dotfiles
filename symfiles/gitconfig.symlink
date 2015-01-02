@@ -39,6 +39,7 @@
 	t = tag -l
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	# Remove a file from the staging area
-    unstage = reset HEAD
-    # Undo the latest commit
-    uncommit = reset --soft HEAD^
+  unstage = reset HEAD
+  # Undo the latest commit
+  uncommit = reset --soft HEAD^
+  fix = "!f() { ${EDITOR} `git diff --name-only`; }; f"

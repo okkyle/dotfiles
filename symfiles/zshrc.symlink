@@ -36,6 +36,7 @@ alias gh=github
 alias dockutil="${DOTFILES}/bin/usr/dockutil"
 alias subl="/Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl"
 alias st="subl"
+alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
 
 function gfiles () { grep "$1" -rn $2 }
 
@@ -71,6 +72,7 @@ export PATH=/usr/texbin:$PATH
 
 export EDITOR='vim'
 
+export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
