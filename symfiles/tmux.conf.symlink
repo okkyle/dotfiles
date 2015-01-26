@@ -34,7 +34,7 @@ bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
 
 # Different windows can have different sizes
-setw -g aggressive-resize on
+setw -g aggressive-resize off
 
 # Clear tmux scrollback history.
 # Use C-l in bash to clear the shell:
