@@ -43,3 +43,12 @@
   # Undo the latest commit
   uncommit = reset --soft HEAD^
   fix = "!f() { ${EDITOR} `git diff --name-only`; }; f"
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[github]
+	user = eramdam
+[ghi]
+[ghi]
+	token = !security find-internet-password -a eramdam -s github.com -l 'ghi token' -w
