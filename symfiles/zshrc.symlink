@@ -29,6 +29,7 @@ alias syncFrontSketchFiles="rsync -av ~/Dropbox/Shared/Front ~/Desktop/Stuff/"
 alias ls="ls -h"
 alias gub="gulp build"
 alias gubw="gulp build && gulp watch"
+alias nf="node front"
 function gfiles () { grep "$1" -rn $2 }
 function newTmux () {
 NAME=$1
