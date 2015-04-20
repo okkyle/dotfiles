@@ -28,6 +28,7 @@ alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
 alias syncFrontSketchFiles="rsync -av ~/Dropbox/Shared/Front ~/Desktop/Stuff/"
 alias ls="ls -h"
 alias gub="gulp build"
+alias guw="gulp watch"
 alias gubw="gulp build && gulp watch"
 alias nf="node front"
 function gfiles () { grep "$1" -rn $2 }
