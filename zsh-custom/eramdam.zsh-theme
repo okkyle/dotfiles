@@ -1,3 +1,15 @@
+################
+# Custom theme (fishy + dpoggi on 2 lines)
+################
+_fishy_collapsed_wd() {
+  echo $(pwd | perl -pe "
+   BEGIN {
+      binmode STDIN,  ':encoding(UTF-8)';
+      binmode STDOUT, ':encoding(UTF-8)';
+   }; s|^$HOME|~|g; s|/([^/])[^/]*(?=/)|/\$1|g
+")
+} 
+
 # This theme is a modification of the dpoggi one bundled with oh-my-zsh, it features a non-emoji lightning character and some visual tweaks
 function my_git_prompt_info() {
   if [[ "$(git config --get oh-my-zsh.hide-status)" != "1" ]]; then
@@ -10,8 +22,7 @@ function my_git_prompt_info() {
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-PROMPT='%{$fg[$NCOLOR]%}%n%{$reset_color%}@%{$fg[cyan]%}%m\
-%{$reset_color%}:%{$fg[magenta]%}%~\
+PROMPT='%{$fg[$NCOLOR]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[magenta]%}$(_fishy_collapsed_wd)\
 
 $(my_git_prompt_info)\
 %{$fg[red]%}%(!.#.»)%{$reset_color%} '
