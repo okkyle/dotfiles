@@ -951,15 +951,15 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>802 362 773 266 0 0 1920 1057 </string>
+	<string>985 348 812 280 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>980 354 924 485 0 0 1920 1057 </string>
+	<string>412 331 924 485 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1280 100 1280 800 -1280 100 1280 800 </string>
+	<string>963 51 955 1004 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>668 43 960 1014 0 0 1920 1057 </string>
+	<string>0 50 960 1007 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1280 45 1280 1372 0 0 2560 1417 </string>
+	<string>0 48 1280 1369 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>440 120 650 426 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
@@ -1522,11 +1522,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>InputMono-Regular 12</string>
+			<string>OfficeCodePro-RegularD 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InputMono-Regular 12</string>
+			<string>OfficeCodePro-RegularD 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2254,11 +2254,11 @@
 			<key>Name</key>
 			<string>Git</string>
 			<key>Non Ascii Font</key>
-			<string>InputMono-Regular 12</string>
+			<string>OfficeCodePro-RegularD 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InputMono-Regular 12</string>
+			<string>OfficeCodePro-RegularD 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2435,6 +2435,10 @@
 	</array>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>453228342.50058597</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>455279146.258407</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2499,7 +2503,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-04-13T20:08:29Z</date>
+	<date>2015-06-06T10:01:16Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -2549,7 +2553,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.0.0.20150412</string>
+	<string>2.1.1</string>
 	<key>mad_hkCenterWindowKeyCode</key>
 	<integer>8</integer>
 	<key>mad_hkCenterWindowModifiers</key>
