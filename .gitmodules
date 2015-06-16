@@ -1,3 +1,6 @@
 [submodule "symfiles/oh-my-zsh.symlink"]
 	path = symfiles/oh-my-zsh.symlink
 	url = https://github.com/robbyrussell/oh-my-zsh
+[submodule "bin/core/k"]
+	path = bin/core/k
+	url = git@github.com:supercrabtree/k.git
