@@ -72,6 +72,7 @@ alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 # for when I'm lazy
 
 alias tmux-cheat="${DOTFILES}/bin/usr/tmux-cheat"
+alias origami-cheat="${DOTFILES}/bin/usr/origami-cheat"
 
 # Go to the root of a repo
 alias groot='cd $(git rev-parse --show-cdup)'
@@ -107,6 +108,9 @@ alias l="k --no-vcs -h"
 alias ll="k --no-vcs -ah"
 alias lg="k -ah"
 
+# Servers
+alias Trisha="ssh -t Trisha 'tmux a'"
+
 # grep easily within files (doesn't work quite well tho)
 function gfiles () { grep "$1" -rn . }
 
@@ -115,6 +119,10 @@ function newTmux () {
 NAME=$1
 tmux a -t $NAME || tmux new -s $NAME
 }
+
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH=/usr/texbin:$PATH
 
 ## for z
 . `brew --prefix`/etc/profile.d/z.sh
