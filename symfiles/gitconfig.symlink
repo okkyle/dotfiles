@@ -16,7 +16,6 @@
 	excludesfile = /Users/Damien/.gitignore
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -43,6 +42,10 @@
   # Undo the latest commit
   uncommit = reset --soft HEAD^
   fix = "!f() { ${EDITOR} `git diff --name-only`; }; f"
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
