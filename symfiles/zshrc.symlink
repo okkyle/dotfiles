@@ -93,9 +93,7 @@ alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
 alias syncFrontSketchFiles="rsync -av ~/Dropbox/Shared/Front ~/Desktop/Stuff/"
 
 # Dev & such
-alias gub="gulp build"
-alias guw="gulp watch"
-alias gubw="gulp build && gulp watch"
+alias gus="gulp serve"
 alias nf="node front"
 alias npif="npm prune && npm i && nf"
 alias npibw="npm prune && npm i && gubw"
