@@ -108,6 +108,7 @@ alias lg="k -ah"
 
 # Servers
 alias Trisha="ssh -t Trisha 'tmux a'"
+alias FrontStaging="ssh -t FrontStaging"
 
 # grep easily within files (doesn't work quite well tho)
 function gfiles () { grep "$1" -rn . }
@@ -124,3 +125,5 @@ export PATH=/usr/texbin:$PATH
 
 ## for z
 . `brew --prefix`/etc/profile.d/z.sh
+
+ulimit -n 1024
