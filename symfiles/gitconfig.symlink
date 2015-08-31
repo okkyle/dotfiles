@@ -41,11 +41,14 @@
   unstage = reset HEAD
   # Undo the latest commit
   uncommit = reset --soft HEAD^
-  fix = "!f() { ${EDITOR} `git diff --name-only`; }; f"
+  # simple but useful
   co = checkout
   br = branch
   ci = commit
   st = status
+  m = merge
+  # show commits between master and prod
+  mprod = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' master --not prod
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
