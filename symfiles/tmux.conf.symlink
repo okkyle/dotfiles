@@ -3,6 +3,10 @@
 # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
 set-option -g default-command 'reattach-to-user-namespace -l zsh'
 
+# Update default binding of `Enter` to also use copy-pipe
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+
 # Full color for Vim.
 set -g default-terminal "screen-256color"
 
@@ -40,6 +44,9 @@ setw -g aggressive-resize off
 # Use C-l in bash to clear the shell:
 # http://stackoverflow.com/questions/10543684/how-can-i-clear-scrollback-buffer-in-tmux
 bind -n C-k clear-history
+
+# Moar history
+set-option -g history-limit 3000
 
 # Mouse support - set to on if you want to use the mouse
 setw -g mode-mouse on
