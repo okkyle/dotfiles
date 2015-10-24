@@ -1,20 +1,47 @@
 # vim:fileencoding=utf-8:noet
-from __future__ import division
+from __future__ import (unicode_literals, division, absolute_import, print_function)
 
-from powerline.lib import mergedicts, add_divider_highlight_group, REMOVE_THIS_KEY
-from powerline.lib.humanize_bytes import humanize_bytes
-from powerline.lib.vcs import guess
-from powerline.lib.threaded import ThreadedSegment, KwThreadedSegment
-from powerline.lib.monotonic import monotonic
 import threading
 import os
 import sys
 import re
+import shutil
+
 from time import sleep
 from subprocess import call, PIPE
-from functools import partial
+
+from powerline.lib import add_divider_highlight_group
+from powerline.lib.dict import mergedicts, REMOVE_THIS_KEY
+from powerline.lib.humanize_bytes import humanize_bytes
+from powerline.lib.vcs import guess, get_fallback_create_watcher
+from powerline.lib.threaded import ThreadedSegment, KwThreadedSegment
+from powerline.lib.monotonic import monotonic
+from powerline.lib.vcs.git import git_directory
+
+import powerline.lib.unicode as plu
+
+from tests.lib import Pl, replace_attr
 from tests import TestCase, SkipTest
-from tests.lib import Pl
+
+
+try:
+	__import__('bzrlib')
+except ImportError:
+	use_bzr = False
+else:
+	use_bzr = True
+
+try:
+	__import__('mercurial')
+except ImportError:
+	use_mercurial = False
+else:
+	use_mercurial = True
+
+
+GIT_REPO = 'git_repo'
+HG_REPO = 'hg_repo'
+BZR_REPO = 'bzr_repo'
 
 
 def thread_number():
@@ -362,7 +389,7 @@ class TestLib(TestCase):
 			return str(kwargs)
 		func = add_divider_highlight_group('hl_group')(decorated_function_name)
 		self.assertEqual(func.__name__, 'decorated_function_name')
-		self.assertEqual(func(kw={}), [{'contents': repr({'kw': {}}), 'divider_highlight_group': 'hl_group'}])
+		self.assertEqual(func(kw={}), [{'contents': repr({str('kw'): {}}), 'divider_highlight_group': 'hl_group'}])
 
 	def test_humanize_bytes(self):
 		self.assertEqual(humanize_bytes(0), '0 B')
@@ -374,96 +401,99 @@ class TestLib(TestCase):
 		self.assertEqual(humanize_bytes(1000000000, si_prefix=False), '953.7 MiB')
 
 
-class TestFilesystemWatchers(TestCase):
-	def do_test_for_change(self, watcher, path):
-		st = monotonic()
-		while monotonic() - st < 1:
-			if watcher(path):
-				return
-			sleep(0.1)
-		self.fail('The change to {0} was not detected'.format(path))
+width_data = {
+	'N': 1,          # Neutral
+	'Na': 1,         # Narrow
+	'A': 1,          # Ambigious
+	'H': 1,          # Half-width
+	'W': 2,          # Wide
+	'F': 2,          # Fullwidth
+}
 
-	def test_file_watcher(self):
-		from powerline.lib.file_watcher import create_file_watcher
-		w = create_file_watcher(use_stat=False)
-		if w.is_stat_based:
-			raise SkipTest('This test is not suitable for a stat based file watcher')
-		f1, f2, f3 = map(lambda x: os.path.join(INOTIFY_DIR, 'file%d' % x), (1, 2, 3))
-		with open(f1, 'wb'):
-			with open(f2, 'wb'):
-				with open(f3, 'wb'):
-					pass
-		ne = os.path.join(INOTIFY_DIR, 'notexists')
-		self.assertRaises(OSError, w, ne)
-		self.assertTrue(w(f1))
-		self.assertTrue(w(f2))
-		os.utime(f1, None), os.utime(f2, None)
-		self.do_test_for_change(w, f1)
-		self.do_test_for_change(w, f2)
-		# Repeat once
-		os.utime(f1, None), os.utime(f2, None)
-		self.do_test_for_change(w, f1)
-		self.do_test_for_change(w, f2)
-		# Check that no false changes are reported
-		self.assertFalse(w(f1), 'Spurious change detected')
-		self.assertFalse(w(f2), 'Spurious change detected')
-		# Check that open the file with 'w' triggers a change
-		with open(f1, 'wb'):
-			with open(f2, 'wb'):
-				pass
-		self.do_test_for_change(w, f1)
-		self.do_test_for_change(w, f2)
-		# Check that writing to a file with 'a' triggers a change
-		with open(f1, 'ab') as f:
-			f.write(b'1')
-		self.do_test_for_change(w, f1)
-		# Check that deleting a file registers as a change
-		os.unlink(f1)
-		self.do_test_for_change(w, f1)
-		# Test that changing the inode of a file does not cause it to stop
-		# being watched
-		os.rename(f3, f2)
-		self.do_test_for_change(w, f2)
-		self.assertFalse(w(f2), 'Spurious change detected')
-		os.utime(f2, None)
-		self.do_test_for_change(w, f2)
 
-	def test_tree_watcher(self):
-		from powerline.lib.tree_watcher import TreeWatcher
-		tw = TreeWatcher()
-		subdir = os.path.join(INOTIFY_DIR, 'subdir')
-		os.mkdir(subdir)
-		if tw.watch(INOTIFY_DIR).is_dummy:
-			raise SkipTest('No tree watcher available')
-		import shutil
-		self.assertTrue(tw(INOTIFY_DIR))
-		self.assertFalse(tw(INOTIFY_DIR))
-		changed = partial(self.do_test_for_change, tw, INOTIFY_DIR)
-		open(os.path.join(INOTIFY_DIR, 'tree1'), 'w').close()
-		changed()
-		open(os.path.join(subdir, 'tree1'), 'w').close()
-		changed()
-		os.unlink(os.path.join(subdir, 'tree1'))
-		changed()
-		os.rmdir(subdir)
-		changed()
-		os.mkdir(subdir)
-		changed()
-		os.rename(subdir, subdir + '1')
-		changed()
-		shutil.rmtree(subdir + '1')
-		changed()
-		os.mkdir(subdir)
-		f = os.path.join(subdir, 'f')
-		open(f, 'w').close()
-		changed()
-		with open(f, 'a') as s:
-			s.write(' ')
-		changed()
-		os.rename(f, f + '1')
-		changed()
+class TestUnicode(TestCase):
+	def assertStringsIdentical(self, s1, s2):
+		self.assertTrue(type(s1) is type(s2), msg='string types differ')
+		self.assertEqual(s1, s2)
 
-use_mercurial = use_bzr = sys.version_info < (3, 0)
+	def test_unicode(self):
+		self.assertTrue(type('abc') is plu.unicode)
+
+	def test_unichr(self):
+		self.assertStringsIdentical('\U0010FFFF', plu.unichr(0x10FFFF))
+		self.assertStringsIdentical('\uFFFF', plu.unichr(0xFFFF))
+		self.assertStringsIdentical('\x20', plu.unichr(0x20))
+
+	def test_u(self):
+		self.assertStringsIdentical('Test', plu.u('Test'))
+		self.assertStringsIdentical('Test', plu.u(b'Test'))
+		self.assertStringsIdentical('«»', plu.u(b'\xC2\xAB\xC2\xBB'))
+		self.assertRaises(UnicodeDecodeError, plu.u, b'\xFF')
+
+	def test_tointiter(self):
+		self.assertEqual([1, 2, 3], list(plu.tointiter(b'\x01\x02\x03')))
+
+	def test_decode_error(self):
+		self.assertStringsIdentical('<FF>', b'\xFF'.decode('utf-8', 'powerline_decode_error'))
+		self.assertStringsIdentical('abc', b'abc'.decode('utf-8', 'powerline_decode_error'))
+
+	def test_register_strwidth_error(self):
+		ename = plu.register_strwidth_error(lambda s: 3)
+		self.assertStringsIdentical(b'???', 'Ａ'.encode('latin1', ename))
+		self.assertStringsIdentical(b'abc', 'abc'.encode('latin1', ename))
+
+	def test_out_u(self):
+		self.assertStringsIdentical('abc', plu.out_u('abc'))
+		self.assertStringsIdentical('abc', plu.out_u(b'abc'))
+		self.assertRaises(TypeError, plu.out_u, None)
+
+	def test_safe_unicode(self):
+		self.assertStringsIdentical('abc', plu.safe_unicode('abc'))
+		self.assertStringsIdentical('abc', plu.safe_unicode(b'abc'))
+		self.assertStringsIdentical('«»', plu.safe_unicode(b'\xc2\xab\xc2\xbb'))
+		with replace_attr(plu, 'get_preferred_output_encoding', lambda: 'latin1'):
+			self.assertStringsIdentical('ÿ', plu.safe_unicode(b'\xFF'))
+		self.assertStringsIdentical('None', plu.safe_unicode(None))
+
+		class FailingStr(object):
+			def __str__(self):
+				raise NotImplementedError('Fail!')
+
+		self.assertStringsIdentical('Fail!', plu.safe_unicode(FailingStr()))
+
+	def test_FailedUnicode(self):
+		self.assertTrue(isinstance(plu.FailedUnicode('abc'), plu.unicode))
+		self.assertEqual('abc', plu.FailedUnicode('abc'))
+
+	def test_string(self):
+		self.assertStringsIdentical(str('abc'), plu.string('abc'))
+		self.assertStringsIdentical(str('abc'), plu.string(b'abc'))
+
+	def test_surrogate_pair_to_character(self):
+		self.assertEqual(0x1F48E, plu.surrogate_pair_to_character(0xD83D, 0xDC8E))
+
+	def test_strwidth_ucs_4(self):
+		self.assertEqual(4, plu.strwidth_ucs_4(width_data, 'abcd'))
+		self.assertEqual(4, plu.strwidth_ucs_4(width_data, 'ＡＢ'))
+		if sys.maxunicode < 0x10FFFF:
+			raise SkipTest('Can only test strwidth_ucs_4 in UCS-4 Pythons')
+
+		def east_asian_width(ch):
+			assert (len(ch) == 1)
+			assert ord(ch) == 0x1F48E
+			return 'F'
+
+		with replace_attr(plu, 'east_asian_width', east_asian_width):
+			# Warning: travis unicodedata.east_asian_width for some reason 
+			# thinks this character is 5 symbols wide.
+			self.assertEqual(2, plu.strwidth_ucs_4(width_data, '\U0001F48E'))
+
+	def test_strwidth_ucs_2(self):
+		self.assertEqual(4, plu.strwidth_ucs_2(width_data, 'abcd'))
+		self.assertEqual(4, plu.strwidth_ucs_2(width_data, 'ＡＢ'))
+		if not sys.maxunicode < 0x10FFFF:
+			raise SkipTest('Can only test strwidth_ucs_2 in UCS-2 Pythons')
+		self.assertEqual(2, plu.strwidth_ucs_2(width_data, '\ud83d\udc8e'))
 
 
 class TestVCS(TestCase):
@@ -485,7 +515,8 @@ class TestVCS(TestCase):
 			self.assertEqual(ans, q)
 
 	def test_git(self):
-		repo = guess(path=GIT_REPO)
+		create_watcher = get_fallback_create_watcher()
+		repo = guess(path=GIT_REPO, create_watcher=create_watcher)
 		self.assertNotEqual(repo, None)
 		self.assertEqual(repo.branch(), 'master')
 		self.assertEqual(repo.status(), None)
@@ -505,157 +536,158 @@ class TestVCS(TestCase):
 		os.remove(os.path.join(GIT_REPO, 'file'))
 		# Test changing branch
 		self.assertEqual(repo.branch(), 'master')
-		call(['git', 'branch', 'branch1'], cwd=GIT_REPO)
-		call(['git', 'checkout', '-q', 'branch1'], cwd=GIT_REPO)
-		self.do_branch_rename_test(repo, 'branch1')
-		# For some reason the rest of this test fails on travis and only on
-		# travis, and I can't figure out why
-		if 'TRAVIS' in os.environ:
-			raise SkipTest('Part of this test fails on Travis for unknown reasons')
-		call(['git', 'branch', 'branch2'], cwd=GIT_REPO)
-		call(['git', 'checkout', '-q', 'branch2'], cwd=GIT_REPO)
-		self.do_branch_rename_test(repo, 'branch2')
-		call(['git', 'checkout', '-q', '--detach', 'branch1'], cwd=GIT_REPO)
-		self.do_branch_rename_test(repo, lambda b: re.match(r'^[a-f0-9]+$', b))
-
-	if use_mercurial:
-		def test_mercurial(self):
-			repo = guess(path=HG_REPO)
-			self.assertNotEqual(repo, None)
-			self.assertEqual(repo.branch(), 'default')
-			self.assertEqual(repo.status(), None)
-			with open(os.path.join(HG_REPO, 'file'), 'w') as f:
-				f.write('abc')
-				f.flush()
-				self.assertEqual(repo.status(), ' U')
-				self.assertEqual(repo.status('file'), 'U')
-				call(['hg', 'add', '.'], cwd=HG_REPO, stdout=PIPE)
-				self.assertEqual(repo.status(), 'D ')
-				self.assertEqual(repo.status('file'), 'A')
-			os.remove(os.path.join(HG_REPO, 'file'))
-
-	if use_bzr:
-		def test_bzr(self):
-			repo = guess(path=BZR_REPO)
-			self.assertNotEqual(repo, None, 'No bzr repo found. Do you have bzr installed?')
-			self.assertEqual(repo.branch(), 'test_powerline')
-			self.assertEqual(repo.status(), None)
-			with open(os.path.join(BZR_REPO, 'file'), 'w') as f:
-				f.write('abc')
-			self.assertEqual(repo.status(), ' U')
-			self.assertEqual(repo.status('file'), '? ')
-			call(['bzr', 'add', '-q', '.'], cwd=BZR_REPO, stdout=PIPE)
-			self.assertEqual(repo.status(), 'D ')
-			self.assertEqual(repo.status('file'), '+N')
-			call(['bzr', 'commit', '-q', '-m', 'initial commit'], cwd=BZR_REPO)
-			self.assertEqual(repo.status(), None)
-			with open(os.path.join(BZR_REPO, 'file'), 'w') as f:
-				f.write('def')
-			self.assertEqual(repo.status(), 'D ')
-			self.assertEqual(repo.status('file'), ' M')
-			self.assertEqual(repo.status('notexist'), None)
-			with open(os.path.join(BZR_REPO, 'ignored'), 'w') as f:
-				f.write('abc')
-			self.assertEqual(repo.status('ignored'), '? ')
-			# Test changing the .bzrignore file should update status
-			with open(os.path.join(BZR_REPO, '.bzrignore'), 'w') as f:
-				f.write('ignored')
-			self.assertEqual(repo.status('ignored'), None)
-			# Test changing the dirstate file should invalidate the cache for
-			# all files in the repo
-			with open(os.path.join(BZR_REPO, 'file2'), 'w') as f:
-				f.write('abc')
-			call(['bzr', 'add', 'file2'], cwd=BZR_REPO, stdout=PIPE)
-			call(['bzr', 'commit', '-q', '-m', 'file2 added'], cwd=BZR_REPO)
-			with open(os.path.join(BZR_REPO, 'file'), 'a') as f:
-				f.write('hello')
-			with open(os.path.join(BZR_REPO, 'file2'), 'a') as f:
-				f.write('hello')
-			self.assertEqual(repo.status('file'), ' M')
-			self.assertEqual(repo.status('file2'), ' M')
-			call(['bzr', 'commit', '-q', '-m', 'multi'], cwd=BZR_REPO)
-			self.assertEqual(repo.status('file'), None)
-			self.assertEqual(repo.status('file2'), None)
-
-			# Test changing branch
-			call(['bzr', 'nick', 'branch1'], cwd=BZR_REPO, stdout=PIPE, stderr=PIPE)
+		try:
+			call(['git', 'branch', 'branch1'], cwd=GIT_REPO)
+			call(['git', 'checkout', '-q', 'branch1'], cwd=GIT_REPO)
 			self.do_branch_rename_test(repo, 'branch1')
+			call(['git', 'branch', 'branch2'], cwd=GIT_REPO)
+			call(['git', 'checkout', '-q', 'branch2'], cwd=GIT_REPO)
+			self.do_branch_rename_test(repo, 'branch2')
+			call(['git', 'checkout', '-q', '--detach', 'branch1'], cwd=GIT_REPO)
+			self.do_branch_rename_test(repo, lambda b: re.match(r'^[a-f0-9]+$', b))
+		finally:
+			call(['git', 'checkout', '-q', 'master'], cwd=GIT_REPO)
 
-			# Test branch name/status changes when swapping repos
-			for x in ('b1', 'b2'):
-				d = os.path.join(BZR_REPO, x)
-				os.mkdir(d)
-				call(['bzr', 'init', '-q'], cwd=d)
-				call(['bzr', 'nick', '-q', x], cwd=d)
-				repo = guess(path=d)
-				self.assertEqual(repo.branch(), x)
+	def test_git_sym(self):
+		create_watcher = get_fallback_create_watcher()
+		dotgit = os.path.join(GIT_REPO, '.git')
+		spacegit = os.path.join(GIT_REPO, ' .git ')
+		os.rename(dotgit, spacegit)
+		try:
+			with open(dotgit, 'w') as F:
+				F.write('gitdir:  .git \n')
+			gitdir = git_directory(GIT_REPO)
+			self.assertTrue(os.path.isdir(gitdir))
+			self.assertEqual(gitdir, os.path.abspath(spacegit))
+			repo = guess(path=GIT_REPO, create_watcher=create_watcher)
+			self.assertEqual(repo.branch(), 'master')
+		finally:
+			os.remove(dotgit)
+			os.rename(spacegit, dotgit)
+
+	def test_mercurial(self):
+		if not use_mercurial:
+			raise SkipTest('Mercurial is not available')
+		create_watcher = get_fallback_create_watcher()
+		repo = guess(path=HG_REPO, create_watcher=create_watcher)
+		self.assertNotEqual(repo, None)
+		self.assertEqual(repo.branch(), 'default')
+		self.assertEqual(repo.status(), None)
+		with open(os.path.join(HG_REPO, 'file'), 'w') as f:
+			f.write('abc')
+			f.flush()
+			self.assertEqual(repo.status(), ' U')
+			self.assertEqual(repo.status('file'), 'U')
+			call(['hg', 'add', '.'], cwd=HG_REPO, stdout=PIPE)
+			self.assertEqual(repo.status(), 'D ')
+			self.assertEqual(repo.status('file'), 'A')
+		os.remove(os.path.join(HG_REPO, 'file'))
+
+	def test_bzr(self):
+		if not use_bzr:
+			raise SkipTest('Bazaar is not available')
+		create_watcher = get_fallback_create_watcher()
+		repo = guess(path=BZR_REPO, create_watcher=create_watcher)
+		self.assertNotEqual(repo, None, 'No bzr repo found. Do you have bzr installed?')
+		self.assertEqual(repo.branch(), 'test_powerline')
+		self.assertEqual(repo.status(), None)
+		with open(os.path.join(BZR_REPO, 'file'), 'w') as f:
+			f.write('abc')
+		self.assertEqual(repo.status(), ' U')
+		self.assertEqual(repo.status('file'), '? ')
+		call(['bzr', 'add', '-q', '.'], cwd=BZR_REPO, stdout=PIPE)
+		self.assertEqual(repo.status(), 'D ')
+		self.assertEqual(repo.status('file'), '+N')
+		call(['bzr', 'commit', '-q', '-m', 'initial commit'], cwd=BZR_REPO)
+		self.assertEqual(repo.status(), None)
+		with open(os.path.join(BZR_REPO, 'file'), 'w') as f:
+			f.write('def')
+		self.assertEqual(repo.status(), 'D ')
+		self.assertEqual(repo.status('file'), ' M')
+		self.assertEqual(repo.status('notexist'), None)
+		with open(os.path.join(BZR_REPO, 'ignored'), 'w') as f:
+			f.write('abc')
+		self.assertEqual(repo.status('ignored'), '? ')
+		# Test changing the .bzrignore file should update status
+		with open(os.path.join(BZR_REPO, '.bzrignore'), 'w') as f:
+			f.write('ignored')
+		self.assertEqual(repo.status('ignored'), None)
+		# Test changing the dirstate file should invalidate the cache for
+		# all files in the repo
+		with open(os.path.join(BZR_REPO, 'file2'), 'w') as f:
+			f.write('abc')
+		call(['bzr', 'add', 'file2'], cwd=BZR_REPO, stdout=PIPE)
+		call(['bzr', 'commit', '-q', '-m', 'file2 added'], cwd=BZR_REPO)
+		with open(os.path.join(BZR_REPO, 'file'), 'a') as f:
+			f.write('hello')
+		with open(os.path.join(BZR_REPO, 'file2'), 'a') as f:
+			f.write('hello')
+		self.assertEqual(repo.status('file'), ' M')
+		self.assertEqual(repo.status('file2'), ' M')
+		call(['bzr', 'commit', '-q', '-m', 'multi'], cwd=BZR_REPO)
+		self.assertEqual(repo.status('file'), None)
+		self.assertEqual(repo.status('file2'), None)
+
+		# Test changing branch
+		call(['bzr', 'nick', 'branch1'], cwd=BZR_REPO, stdout=PIPE, stderr=PIPE)
+		self.do_branch_rename_test(repo, 'branch1')
+
+		# Test branch name/status changes when swapping repos
+		for x in ('b1', 'b2'):
+			d = os.path.join(BZR_REPO, x)
+			os.mkdir(d)
+			call(['bzr', 'init', '-q'], cwd=d)
+			call(['bzr', 'nick', '-q', x], cwd=d)
+			repo = guess(path=d, create_watcher=create_watcher)
+			self.assertEqual(repo.branch(), x)
+			self.assertFalse(repo.status())
+			if x == 'b1':
+				open(os.path.join(d, 'dirty'), 'w').close()
+				self.assertTrue(repo.status())
+		os.rename(os.path.join(BZR_REPO, 'b1'), os.path.join(BZR_REPO, 'b'))
+		os.rename(os.path.join(BZR_REPO, 'b2'), os.path.join(BZR_REPO, 'b1'))
+		os.rename(os.path.join(BZR_REPO, 'b'), os.path.join(BZR_REPO, 'b2'))
+		for x, y in (('b1', 'b2'), ('b2', 'b1')):
+			d = os.path.join(BZR_REPO, x)
+			repo = guess(path=d, create_watcher=create_watcher)
+			self.do_branch_rename_test(repo, y)
+			if x == 'b1':
 				self.assertFalse(repo.status())
-				if x == 'b1':
-					open(os.path.join(d, 'dirty'), 'w').close()
-					self.assertTrue(repo.status())
-			os.rename(os.path.join(BZR_REPO, 'b1'), os.path.join(BZR_REPO, 'b'))
-			os.rename(os.path.join(BZR_REPO, 'b2'), os.path.join(BZR_REPO, 'b1'))
-			os.rename(os.path.join(BZR_REPO, 'b'), os.path.join(BZR_REPO, 'b2'))
-			for x, y in (('b1', 'b2'), ('b2', 'b1')):
-				d = os.path.join(BZR_REPO, x)
-				repo = guess(path=d)
-				self.do_branch_rename_test(repo, y)
-				if x == 'b1':
-					self.assertFalse(repo.status())
-				else:
-					self.assertTrue(repo.status())
+			else:
+				self.assertTrue(repo.status())
 
-old_HGRCPATH = None
-old_cwd = None
+	@classmethod
+	def setUpClass(cls):
+		cls.powerline_old_cwd = os.getcwd()
+		os.chdir(os.path.dirname(__file__))
+		call(['git', 'init', '--quiet', GIT_REPO])
+		assert os.path.isdir(GIT_REPO)
+		call(['git', 'config', '--local', 'user.name', 'Foo'], cwd=GIT_REPO)
+		call(['git', 'config', '--local', 'user.email', 'bar@example.org'], cwd=GIT_REPO)
+		call(['git', 'commit', '--allow-empty', '--message', 'Initial commit', '--quiet'], cwd=GIT_REPO)
+		if use_mercurial:
+			cls.powerline_old_HGRCPATH = os.environ.get('HGRCPATH')
+			os.environ['HGRCPATH'] = ''
+			call(['hg', 'init', HG_REPO])
+			with open(os.path.join(HG_REPO, '.hg', 'hgrc'), 'w') as hgrc:
+				hgrc.write('[ui]\n')
+				hgrc.write('username = Foo <bar@example.org>\n')
+		if use_bzr:
+			call(['bzr', 'init', '--quiet', BZR_REPO])
+			call(['bzr', 'config', 'email=Foo <bar@example.org>'], cwd=BZR_REPO)
+			call(['bzr', 'config', 'nickname=test_powerline'], cwd=BZR_REPO)
+			call(['bzr', 'config', 'create_signatures=0'], cwd=BZR_REPO)
 
-
-GIT_REPO = 'git_repo' + os.environ.get('PYTHON', '')
-HG_REPO = 'hg_repo' + os.environ.get('PYTHON', '')
-BZR_REPO = 'bzr_repo' + os.environ.get('PYTHON', '')
-INOTIFY_DIR = 'inotify' + os.environ.get('PYTHON', '')
-
-
-def setUpModule():
-	global old_cwd
-	global old_HGRCPATH
-	old_cwd = os.getcwd()
-	os.chdir(os.path.dirname(__file__))
-	call(['git', 'init', '--quiet', GIT_REPO])
-	assert os.path.isdir(GIT_REPO)
-	call(['git', 'config', '--local', 'user.name', 'Foo'], cwd=GIT_REPO)
-	call(['git', 'config', '--local', 'user.email', 'bar@example.org'], cwd=GIT_REPO)
-	call(['git', 'commit', '--allow-empty', '--message', 'Initial commit', '--quiet'], cwd=GIT_REPO)
-	if use_mercurial:
-		old_HGRCPATH = os.environ.get('HGRCPATH')
-		os.environ['HGRCPATH'] = ''
-		call(['hg', 'init', HG_REPO])
-		with open(os.path.join(HG_REPO, '.hg', 'hgrc'), 'w') as hgrc:
-			hgrc.write('[ui]\n')
-			hgrc.write('username = Foo <bar@example.org>\n')
-	if use_bzr:
-		call(['bzr', 'init', '--quiet', BZR_REPO])
-		call(['bzr', 'config', 'email=Foo <bar@example.org>'], cwd=BZR_REPO)
-		call(['bzr', 'config', 'nickname=test_powerline'], cwd=BZR_REPO)
-		call(['bzr', 'config', 'create_signatures=0'], cwd=BZR_REPO)
-	os.mkdir(INOTIFY_DIR)
-
-
-def tearDownModule():
-	global old_cwd
-	global old_HGRCPATH
-	for repo_dir in [INOTIFY_DIR, GIT_REPO] + ([HG_REPO] if use_mercurial else []) + ([BZR_REPO] if use_bzr else []):
-		for root, dirs, files in list(os.walk(repo_dir, topdown=False)):
-			for file in files:
-				os.remove(os.path.join(root, file))
-			for dir in dirs:
-				os.rmdir(os.path.join(root, dir))
-		os.rmdir(repo_dir)
-	if use_mercurial:
-		if old_HGRCPATH is None:
-			os.environ.pop('HGRCPATH')
-		else:
-			os.environ['HGRCPATH'] = old_HGRCPATH
-	os.chdir(old_cwd)
+	@classmethod
+	def tearDownClass(cls):
+		for repo_dir in [GIT_REPO] + ([HG_REPO] if use_mercurial else []) + ([BZR_REPO] if use_bzr else []):
+			shutil.rmtree(repo_dir)
+		if use_mercurial:
+			if cls.powerline_old_HGRCPATH is None:
+				os.environ.pop('HGRCPATH')
+			else:
+				os.environ['HGRCPATH'] = cls.powerline_old_HGRCPATH
+		os.chdir(cls.powerline_old_cwd)
 
 
 if __name__ == '__main__':

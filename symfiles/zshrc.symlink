@@ -7,8 +7,10 @@ export SHELL=/bin/zsh
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export ZSH_CUSTOM=$DOTFILES/zsh-custom
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/bin
-
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export PATH="$PATH:$DOTFILES/bin/usr"
 export EDITOR='vim'
 
 # Locales
@@ -25,93 +27,46 @@ export LC_TIME="en_US.UTF-8"
 export NVM_DIR="/Users/Damien/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# highlight for less
-export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
-export LESS=' -R '
-
 # Set name of the theme to load.
 ZSH_THEME="eramdam"
-
-# Don't spam history w/ "clear"
-HIST_IGNORE_SPACE="clear"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-DISABLE_AUTO_UPDATE="false"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx git battery colored-man copydir copyfile cp)
-
+plugins=(osx battery colored-man copydir copyfile cp sprunge sublime z)
 source $ZSH/oh-my-zsh.sh
 source $DOTFILES/bin/core/k/k.sh
 
+# Don't spam history w/ "clear"
+HIST_IGNORE_SPACE="clear"
+DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="false"
+
 # ALIASES
-
-# Sweet'o'clock
 alias clock="${DOTFILES}/bin/usr/tty-clock -bsC 4"
-
-# relaunch shell easily
 alias rezsh='exec $SHELL -l'
-
-# way faster than pastie-alikes
-alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
-
-# for when I'm lazy
-
 alias tmux-cheat="${DOTFILES}/bin/usr/tmux-cheat"
 alias origami-cheat="${DOTFILES}/bin/usr/origami-cheat"
-
-# Go to the root of a repo
 alias groot='cd $(git rev-parse --show-cdup)'
-
-# wow
 alias wow='git status'
-
+alias gp='git push'
 alias gh=github
-
-# Sublime text
-alias subl="/Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl"
-alias st="subl"
-
-# add SSH keys
 alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
-
-# because I'm lazy yo
-alias syncFrontSketchFiles="rsync -av ~/Dropbox/Shared/Front ~/Desktop/Stuff/"
-
-# Dev & such
+alias syncFrontSketchFiles="rsync -rv --delete ~/Dropbox/Shared/Front/{1_UI\ Files,3_Web,7_Icons} ~/Desktop/Stuff/Front"
+alias gu="gulp"
 alias gus="gulp serve"
 alias nf="node front"
 alias npif="npm prune && npm i && nf"
 alias npibw="npm prune && npm i && gubw"
-
-# the best
 alias wtf='$(thefuck $(fc -ln -1))'
-
-# k
 alias l="k --no-vcs -h"
 alias ll="k --no-vcs -ah"
 alias lg="k -ah"
+alias sort-sizes="du -h --max-depth=1 | sort -h"
+
+alias screenshot-shadow-off='defaults write com.apple.screencapture disable-shadow -bool true'
+alias screenshot-shadow-on='defaults write com.apple.screencapture disable-shadow -bool false'
 
 # Servers
 alias Trisha="ssh -t Trisha 'tmux a'"
 alias FrontStaging="ssh -t FrontStaging"
-
-# grep easily within files (doesn't work quite well tho)
-function gfiles () { grep "$1" -rn . }
 
 # Opens a new tmux session w/ a name or re-attach if it exists
 function newTmux () {
@@ -119,11 +74,5 @@ NAME=$1
 tmux a -t $NAME || tmux new -s $NAME
 }
 
-export RBENV_ROOT=/usr/local/var/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH=/usr/texbin:$PATH
-
-## for z
-. `brew --prefix`/etc/profile.d/z.sh
-
 ulimit -n 1024
+eval "$(tmuxifier init -)"

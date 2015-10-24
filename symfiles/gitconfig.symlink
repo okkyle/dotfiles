@@ -47,6 +47,8 @@
   ci = commit
   st = status
   m = merge
+  # Get the hash of the last commit
+  lci = rev-parse HEAD
   # show commits between master and prod
   mprod = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' master --not prod
 [filter "hawser"]

@@ -1,12 +1,22 @@
-if test -z "${POWERLINE_COMMAND}" ; then
-	if which powerline-client &>/dev/null ; then
-		export POWERLINE_COMMAND=powerline-client
-	elif which powerline &>/dev/null ; then
-		export POWERLINE_COMMAND=powerline
-	else
-		export POWERLINE_COMMAND="$0:A:h:h:h:h/scripts/powerline"
+_POWERLINE_SOURCED="$0:A"
+
+_powerline_columns_fallback() {
+	if which stty &>/dev/null ; then
+		local cols="$(stty size 2>/dev/null)"
+		if ! test -z "$cols" ; then
+			echo "${cols#* }"
+			return 0
+		fi
 	fi
-fi
+	echo 0
+	return 0
+}
+
+_powerline_append_precmd_function() {
+	if test -z "${precmd_functions[(re)$1]}" ; then
+		precmd_functions+=( $1 )
+	fi
+}
 
 integer _POWERLINE_JOBNUM
 
@@ -28,11 +38,11 @@ _powerline_init_tmux_support() {
 		}
 
 		function -g _powerline_tmux_set_columns() {
-			_powerline_tmux_setenv COLUMNS "$COLUMNS"
+			_powerline_tmux_setenv COLUMNS "${COLUMNS:-$(_powerline_columns_fallback)}"
 		}
 
 		chpwd_functions+=( _powerline_tmux_set_pwd )
-		trap "_powerline_tmux_set_columns" SIGWINCH
+		trap '_powerline_tmux_set_columns' SIGWINCH
 		_powerline_tmux_set_columns
 		_powerline_tmux_set_pwd
 	fi
@@ -56,7 +66,7 @@ _powerline_init_modes_support() {
 	}
 
 	function -g _powerline_set_true_keymap_name() {
-		export _POWERLINE_MODE="${1}"
+		_POWERLINE_MODE="${1}"
 		local plm_bk="$(bindkey -lL ${_POWERLINE_MODE})"
 		if [[ $plm_bk = 'bindkey -A'* ]] ; then
 			_powerline_set_true_keymap_name ${(Q)${${(z)plm_bk}[3]}}
@@ -79,10 +89,10 @@ _powerline_init_modes_support() {
 	_powerline_set_main_keymap_name
 
 	if [[ "$_POWERLINE_MODE" != vi* ]] ; then
-		export _POWERLINE_DEFAULT_MODE="$_POWERLINE_MODE"
+		_POWERLINE_DEFAULT_MODE="$_POWERLINE_MODE"
 	fi
 
-	precmd_functions+=( _powerline_set_main_keymap_name )
+	_powerline_append_precmd_function _powerline_set_main_keymap_name
 }
 
 _powerline_set_jobnum() {
@@ -105,33 +115,50 @@ _powerline_update_counter() {
 
 _powerline_setup_prompt() {
 	emulate -L zsh
-	for f in "${precmd_functions[@]}"; do
-		if [[ "$f" = "_powerline_set_jobnum" ]]; then
-			return
-		fi
-	done
-	precmd_functions+=( _powerline_set_jobnum )
+
+	_powerline_append_precmd_function _powerline_set_jobnum
+
+	VIRTUAL_ENV_DISABLE_PROMPT=1
+
 	if test -z "${POWERLINE_NO_ZSH_ZPYTHON}" && { zmodload libzpython || zmodload zsh/zpython } &>/dev/null ; then
-		precmd_functions+=( _powerline_update_counter )
+		_powerline_append_precmd_function _powerline_update_counter
 		zpython 'from powerline.bindings.zsh import setup as _powerline_setup'
-		zpython '_powerline = _powerline_setup()'
+		zpython '_powerline_setup(globals())'
 		zpython 'del _powerline_setup'
+		powerline-reload() {
+			zpython 'from powerline.bindings.zsh import reload as _powerline_reload'
+			zpython '_powerline_reload()'
+			zpython 'del _powerline_reload'
+		}
+		powerline-reload-config() {
+			zpython 'from powerline.bindings.zsh import reload_config as _powerline_reload_config'
+			zpython '_powerline_reload_config()'
+			zpython 'del _powerline_reload_config'
+		}
 	else
-		local add_args='--last_exit_code=$?'
-		add_args+=' --last_pipe_status="$pipestatus"'
-		add_args+=' --renderer_arg="client_id=$$"'
+		if test -z "${POWERLINE_COMMAND}" ; then
+			POWERLINE_COMMAND="$($POWERLINE_CONFIG_COMMAND shell command)"
+		fi
+
+		local add_args='-r .zsh'
+		add_args+=' --last-exit-code=$?'
+		add_args+=' --last-pipe-status="$pipestatus"'
+		add_args+=' --renderer-arg="client_id=$$"'
+		add_args+=' --renderer-arg="shortened_path=${(%):-%~}"'
 		add_args+=' --jobnum=$_POWERLINE_JOBNUM'
-		local new_args_2=' -R parser_state=${(%%):-%_}'
-		new_args_2+=' -R local_theme=continuation'
-		local add_args_3=$add_args' -R local_theme=select'
+		add_args+=' --renderer-arg="mode=$_POWERLINE_MODE"'
+		add_args+=' --renderer-arg="default_mode=$_POWERLINE_DEFAULT_MODE"'
+		local new_args_2=' --renderer-arg="parser_state=${(%%):-%_}"'
+		new_args_2+=' --renderer-arg="local_theme=continuation"'
+		local add_args_3=$add_args' --renderer-arg="local_theme=select"'
 		local add_args_2=$add_args$new_args_2
-		add_args+=' --width=$(( COLUMNS - 1 ))'
+		add_args+=' --width=$(( ${COLUMNS:-$(_powerline_columns_fallback)} - ${ZLE_RPROMPT_INDENT:-1} ))'
 		local add_args_r2=$add_args$new_args_2
-		PS1='$($POWERLINE_COMMAND shell aboveleft -r zsh_prompt '$add_args')'
-		RPS1='$($POWERLINE_COMMAND shell right -r zsh_prompt '$add_args')'
-		PS2='$($POWERLINE_COMMAND shell left -r zsh_prompt '$add_args_2')'
-		RPS2='$($POWERLINE_COMMAND shell right -r zsh_prompt '$add_args_r2')'
-		PS3='$($POWERLINE_COMMAND shell left -r zsh_prompt '$add_args_3')'
+		PS1='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell aboveleft '$add_args')'
+		RPS1='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell right '$add_args')'
+		PS2='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell left '$add_args_2')'
+		RPS2='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell right '$add_args_r2')'
+		PS3='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell left '$add_args_3')'
 	fi
 }
 
@@ -155,16 +182,25 @@ _powerline_add_widget() {
 		eval "function $save_widget() { emulate -L zsh; $widget \$@ }"
 		eval "${old_widget_command/$widget/$save_widget}"
 		zle -N $widget $function
-		export _POWERLINE_SAVE_WIDGET="$save_widget"
+		_POWERLINE_SAVE_WIDGET="$save_widget"
 	fi
 }
 
+if test -z "${POWERLINE_CONFIG_COMMAND}" ; then
+	if which powerline-config >/dev/null ; then
+		POWERLINE_CONFIG_COMMAND=powerline-config
+	else
+		POWERLINE_CONFIG_COMMAND="$_POWERLINE_SOURCED:h:h:h:h/scripts/powerline-config"
+	fi
+fi
+
 setopt promptpercent
 setopt promptsubst
-if test -z "$POWERLINE_NO_ZSH_PROMPT$POWERLINE_NO_SHELL_PROMPT" ; then
+
+if "${POWERLINE_CONFIG_COMMAND}" shell --shell=zsh uses prompt ; then
 	_powerline_setup_prompt
 	_powerline_init_modes_support
 fi
-if test -z "$POWERLINE_NO_ZSH_TMUX_SUPPORT$POWERLINE_NO_SHELL_TMUX_SUPPORT" ; then
+if "${POWERLINE_CONFIG_COMMAND}" shell --shell=zsh uses tmux ; then
 	_powerline_init_tmux_support
 fi

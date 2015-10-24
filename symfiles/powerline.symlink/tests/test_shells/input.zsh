@@ -1,21 +1,54 @@
-unsetopt promptsp transientrprompt
-POWERLINE_COMMAND=( $PWD/scripts/powerline -p $PWD/powerline/config_files )
-POWERLINE_COMMAND=( $POWERLINE_COMMAND -t default_leftonly.segment_data.hostname.args.only_if_ssh=false )
-POWERLINE_COMMAND=( $POWERLINE_COMMAND -c ext.shell.theme=default_leftonly )
-VIRTUAL_ENV=
-source powerline/bindings/zsh/powerline.zsh ; cd tests/shell/3rd
+unset HOME
+unsetopt promptsp notransientrprompt
+setopt interactivecomments
+setopt autonamedirs
+function set_theme_option() {
+	export POWERLINE_THEME_OVERRIDES="${POWERLINE_THEME_OVERRIDES};$1=$2"
+	powerline-reload-config
+}
+function set_theme() {
+	export POWERLINE_CONFIG_OVERRIDES="ext.shell.theme=$1"
+	powerline-reload-config
+}
+if test -n "$POWERLINE_NO_ZSH_ZPYTHON" ; then
+	powerline-reload-config():
+fi
+source powerline/bindings/zsh/powerline.zsh
+set_theme_option default_leftonly.segment_data.hostname.args.only_if_ssh false
+set_theme_option default.segment_data.hostname.args.only_if_ssh false
+ABOVE_LEFT='[{
+	"left": [
+		{
+			"function": "powerline.segments.common.env.environment",
+			"args": {"variable": "DISPLAYED_ENV_VAR"}
+		}
+	]
+}]'
+ABOVE_FULL='[{
+	"left": [
+		{
+			"type": "string",
+			"name": "background",
+			"draw_hard_divider": false,
+			"width": "auto"
+		}
+	],
+	"right": [
+		{
+			"function": "powerline.segments.common.env.environment",
+			"args": {"variable": "DISPLAYED_ENV_VAR"}
+		}
+	]
+}]'
+set_theme default_leftonly
+export VIRTUAL_ENV=
+cd tests/shell/3rd
 cd .git
 cd ..
-VIRTUAL_ENV="$HOME/.virtenvs/some-virtual-environment"
+VIRTUAL_ENV="/home/USER/.virtenvs/some-virtual-environment"
 VIRTUAL_ENV=
-bash -c 'echo $$>pid ; while true ; do sleep 0.1s ; done' &
+bgscript.sh & waitpid.sh
 false
-select abc in def ghi jkl
-do
-	echo $abc
-	break
-done
-1
 kill `cat pid` ; sleep 1s
 cd "$DIR1"
 cd ../"$DIR2"
@@ -25,11 +58,32 @@ cd ../'#[bold]'
 cd ../'(echo)'
 cd ../'$(echo)'
 cd ../'`echo`'
+cd ../'«Unicode!»'
 cd ..
-POWERLINE_COMMAND=( $POWERLINE_COMMAND[1,4] ${${POWERLINE_COMMAND[5]}/_leftonly} ) ; bindkey -v
+bindkey -v ; set_theme default
 
 
 echo abc
 false
+set_theme_option default.segment_data.hostname.display false
+set_theme_option default.segment_data.user.display false
+select abc in def ghi jkl
+do
+	echo $abc
+	break
+done
+1
+cd .
+cd .
+set_theme_option default.segments.above "$ABOVE_LEFT"
+export DISPLAYED_ENV_VAR=foo
+unset DISPLAYED_ENV_VAR
+set_theme_option default.segments.above "$ABOVE_FULL"
+export DISPLAYED_ENV_VAR=foo
+unset DISPLAYED_ENV_VAR
+set_theme_option default.segments.above
+hash -d foo=$PWD:h ; cd .
+set_theme_option default.dividers.left.hard \$ABC
+true
 true is the last line
 exit
