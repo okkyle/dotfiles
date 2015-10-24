@@ -98,4 +98,7 @@ set-option -g message-fg colour232
 set-option -g message-command-bg colour233
 set-option -g message-command-fg colour250
 
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
 run '~/.tmux/plugins/tpm/tpm'
