@@ -10,3 +10,6 @@
 [submodule "symfiles/zsh.symlink/zsh-syntax-highlighting"]
 	path = symfiles/zsh.symlink/zsh-syntax-highlighting
 	url = git://github.com/jimmijj/zsh-syntax-highlighting
+[submodule "symfiles/powerline.symlink"]
+	path = symfiles/powerline.symlink
+	url = git://github.com/powerline/powerline

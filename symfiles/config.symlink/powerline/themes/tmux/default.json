@@ -1,26 +1,38 @@
 {
 	"default_module": "powerline.segments.common",
 	"segment_data": {
-		"uptime": {
-			"before": "⇑  "
-		}
+		"powerline.segments.common.net.hostname": {
+			"before": ""
+		},
+    "powerline.segments.common.sys.uptime": {
+      "before": ""
+    }
 	},
+	"dividers": {
+    "left": {
+      "hard": "",
+      "soft": ""
+    },
+    "right": {
+      "hard": " ",
+      "soft": ""
+    }
+  },
 	"segments": {
-		"right": [{
-      "name": "battery"
-      },{
-			"name": "uptime",
-			"priority": 50
+		"right": [
+    {
+      "function": "powerline.segments.common.bat.battery"
+    },
+    {
+			"function": "powerline.segments.common.time.date"
 		}, {
-			"name": "date"
-		}, {
-			"name": "date",
+			"function": "powerline.segments.common.time.date",
 			"args": {
 				"format": "%H:%M",
 				"istime": true
 			}
 		},{
-			"name": "hostname",
+			"function": "powerline.segments.common.net.hostname",
 			"args": {
 				"exclude_domain": true
 			}

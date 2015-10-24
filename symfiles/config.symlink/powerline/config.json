@@ -2,14 +2,14 @@
 	"common": {
 		"term_truecolor": true,
 		"dividers": {
-			"left": {
-				"hard": "",
-				"soft": ""
-			},
-			"right": {
-				"hard": " ",
-				"soft": " 〈"
-			}
+		  "left": {
+		    "hard": "▌ ",
+		    "soft": "│ "
+		  },
+		  "right": {
+		    "hard": " ▐",
+		    "soft": " │"
+		  }
 		},
 		"spaces": 1
 	},
