@@ -36,8 +36,8 @@ setw -g aggressive-resize off
 set-option -g history-limit 3000
 set -g mouse-utf8 on
 set -g mouse on
-bind -n WheelUpPane   select-pane -t= \; copy-mode -e \; send-keys -M
-bind -n WheelDownPane select-pane -t= \;                 send-keys -M
+# Workaround for scroll on tmux 2.1 https://github.com/tangledhelix/dotfiles/issues/3
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
 
 # Visual/Theme
 
