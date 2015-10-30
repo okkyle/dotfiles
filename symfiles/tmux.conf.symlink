@@ -68,8 +68,8 @@ set -g window-status-format "#[fg=colour244,bg=colour234] #I #[fg=colour244]〉#
 set-option -g window-status-current-format "#[fg=colour234,bg=colour31]#[fg=colour117,bg=colour31] #I 〉#[fg=colour231,bold]#W #[fg=colour31,bg=colour234,nobold]"
 
 # Window with activity status
-set-option -g window-status-activity-bg colour243 # fg and bg are flipped here due to
-set-option -g window-status-activity-fg colour233 # a bug in tmux
+set-option -g window-status-activity-bg colour31 # fg and bg are flipped here due to
+set-option -g window-status-activity-fg colour234 # a bug in tmux
 
 # Window separator
 set-option -g window-status-separator ""
