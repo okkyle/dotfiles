@@ -542,11 +542,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>355 283 924 485 0 0 1920 1057 </string>
+	<string>611 822 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1920 0 1920 1080 -1920 0 1920 1080 </string>
+	<string>-1279 0 1277 777 -1280 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-1128 35 570 402 -1280 0 1280 777 </string>
+	<string>1282 735 1277 677 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_DFAD0BA8-A56A-4C9B-B9F8-358E16428803</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_DFAD0BA8-A56A-4C9B-B9F8-358E16428803_selection</key>
@@ -728,9 +728,9 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<true/>
+			<false/>
 			<key>Blur Radius</key>
-			<real>15</real>
+			<real>30</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1263,7 +1263,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.092966452240943909</real>
+			<real>0.077281368942655748</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -1460,7 +1460,7 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<true/>
+			<false/>
 			<key>Blur Radius</key>
 			<real>15</real>
 			<key>Bold Color</key>
@@ -1995,7 +1995,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.24191245436668396</real>
+			<real>0.061762676260175085</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -2192,9 +2192,9 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<true/>
+			<false/>
 			<key>Blur Radius</key>
-			<real>15</real>
+			<real>30</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2258,7 +2258,7 @@
 				<real>1</real>
 			</dict>
 			<key>Guid</key>
-			<string>DFAD0BA8-A56A-4C9B-B9F8-358E16428803</string>
+			<string>997E47F7-6467-4862-A26D-E4FCA1E71EB2</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
@@ -2729,7 +2729,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.15768307447433472</real>
+			<real>0.077281368942655748</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -2753,7 +2753,7 @@
 		</dict>
 	</array>
 	<key>NoSyncLastTipTime</key>
-	<real>466356780.40862602</real>
+	<real>467702037.05145401</real>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
@@ -2767,12 +2767,16 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>465683454.89104903</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>466919363.97133303</real>
+	<real>467665655.09378397</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
 		<string>0000</string>
 		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -2838,11 +2842,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>http://iterm2.com/appcasts/testing3.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-19T03:49:17Z</date>
+	<date>2015-10-28T16:34:35Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -2850,7 +2854,7 @@
 	<key>Show Toolbelt</key>
 	<false/>
 	<key>ShowBookmarkName</key>
-	<true/>
+	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -2880,7 +2884,7 @@
 	<key>UseCompactLabel</key>
 	<true/>
 	<key>UseLionStyleFullscreen</key>
-	<false/>
+	<true/>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
@@ -2896,7 +2900,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>2.9.20151001</string>
 	<key>mad_hkCenterWindowKeyCode</key>
 	<integer>8</integer>
 	<key>mad_hkCenterWindowModifiers</key>
