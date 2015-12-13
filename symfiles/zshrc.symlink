@@ -11,6 +11,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$PATH:$DOTFILES/bin/usr"
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 export EDITOR='vim'
 
 # Locales
@@ -54,6 +55,7 @@ alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
 alias syncFrontSketchFiles="rsync -rv --delete ~/Dropbox/Shared/Front/{1_UI\ Files,3_Web,7_Icons} ~/Desktop/Stuff/Front"
 alias gu="gulp"
 alias gus="gulp serve"
+alias gufs="gulp fast-serve"
 alias nf="node front"
 alias npif="npm prune && npm i && nf"
 alias npibw="npm prune && npm i && gubw"

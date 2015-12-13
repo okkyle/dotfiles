@@ -4,6 +4,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'stonevil/tmux-wan-status'
 set -g @plugin 'stonevil/tmux-lan-status'
 set -g @plugin 'knakayama/tmux-uptime'
+set -g @plugin 'tmux-plugins/tmux-battery'
 
 
 # bindins
@@ -62,7 +63,7 @@ set-option -g status-right-bg colour16
 set-option -g status-right-bg colour234
 set-option -g status-right-fg colour243
 set-option -g status-right-length 150
-set -g status-right '#[bg=colour232,fg=colour254] #{lan_status} #{wan_status} #[bg=colour234,fg=colour254] #{uptime} | %H:%M #[fg=colour16,bg=colour254,bold] #h '
+set -g status-right '#[bg=colour232,fg=colour254] #{lan_status} #[bg=colour234,fg=colour254] #{battery_percentage} (#{battery_remain}) | %H:%M #[fg=colour16,bg=colour254,bold] #h '
 
 set -g window-status-format "#[fg=colour244,bg=colour234] #I #[fg=colour244]〉#[default,bg=colour234,fg=colour254]#W "
 set-option -g window-status-current-format "#[fg=colour234,bg=colour31]#[fg=colour117,bg=colour31] #I 〉#[fg=colour231,bold]#W #[fg=colour31,bg=colour234,nobold]"
