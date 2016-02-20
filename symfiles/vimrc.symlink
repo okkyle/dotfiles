@@ -39,6 +39,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" mouse mode
+set mouse=a
+
 " Désactiver les touches directionnelles
 " Les ; sont rarement utilisés l'un à la suite de l'autre
 :imap ;; <Esc>
