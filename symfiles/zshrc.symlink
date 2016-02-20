@@ -9,10 +9,9 @@ export ZSH_CUSTOM=$DOTFILES/zsh-custom
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/bin
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$PATH:$DOTFILES/bin/usr"
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 export EDITOR='vim'
+export PATH=$(npm bin):$PATH
 
 # Locales
 export LC_ALL="en_US.UTF-8"
@@ -25,12 +24,12 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 
 # nvm
-export NVM_DIR="/Users/Damien/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR=~/.nvm
+#   . $(brew --prefix nvm)/nvm.sh
 
 # Set name of the theme to load.
 ZSH_THEME="eramdam"
-plugins=(osx battery colored-man copydir copyfile cp sprunge sublime z)
+plugins=(osx battery colored-man copydir copyfile cp sprunge z)
 source $ZSH/oh-my-zsh.sh
 source $DOTFILES/bin/core/k/k.sh
 
@@ -46,13 +45,12 @@ alias rezsh='exec $SHELL -l'
 alias tmux-cheat="${DOTFILES}/bin/usr/tmux-cheat"
 alias origami-cheat="${DOTFILES}/bin/usr/origami-cheat"
 alias groot='cd $(git rev-parse --show-cdup)'
-alias wow='git status'
 alias gp='git push'
 alias gpu='git pull'
 alias gs='git pull && git push'
 alias gh=github
 alias add-keys-front="ssh-add -D && ssh-add ~/.ssh/id_rsa"
-alias syncFrontSketchFiles="rsync -rv --delete ~/Dropbox/Shared/Front/{1_UI\ Files,3_Web,7_Icons} ~/Desktop/Stuff/Front"
+alias syncFrontSketchFiles="rsync -rv --delete ~/Dropbox\ \(Front\)/DESIGN/{02_OSX-UI,07_WEB} ~/Desktop/Stuff/FrontDesign"
 alias gu="gulp"
 alias gus="gulp serve"
 alias gufs="gulp fast-serve"
@@ -64,6 +62,11 @@ alias l="k --no-vcs -h"
 alias ll="k --no-vcs -ah"
 alias lg="k -ah"
 alias sort-sizes="du -h --max-depth=1 | sort -h"
+alias apm="apm-beta"
+alias atom="atom-beta"
+alias st='atom'
+alias stt='atom .'
+alias gtw='gittower .'
 
 alias screenshot-shadow-off='defaults write com.apple.screencapture disable-shadow -bool true'
 alias screenshot-shadow-on='defaults write com.apple.screencapture disable-shadow -bool false'
@@ -78,5 +81,14 @@ NAME=$1
 tmux a -t $NAME || tmux new -s $NAME
 }
 
+function tab-title () {
+    echo -ne "\033]0;"$*"\007"
+}
+
+function nth-commit() {
+  git rev-list HEAD | tail -n $1 | head -n 1
+}
+
 ulimit -n 1024
-eval "$(tmuxifier init -)"
+eval "$(rbenv init -)"
+# eval "$(tmuxifier init -)"
