@@ -11,13 +11,13 @@ then
   # yeah this is cool
 else
   echo_title_update "Homebrew (brew)"
-  brewu
+  brew update
   brew cleanup
 fi
 
-brewtap homebrew/dupes
+brew tap homebrew/dupes
 
 # cask
-brewtap caskroom/cask
-brewtap caskroom/versions
-brewinstall "brew-cask"
+brew tap caskroom/cask
+brew tap caskroom/versions
+brew install "brew-cask"
