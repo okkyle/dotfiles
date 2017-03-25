@@ -13,3 +13,6 @@
 [submodule "symfiles/powerline.symlink"]
 	path = symfiles/powerline.symlink
 	url = git://github.com/powerline/powerline
+[submodule "bin/core/z"]
+	path = bin/core/z
+	url = https://github.com/rupa/z/
