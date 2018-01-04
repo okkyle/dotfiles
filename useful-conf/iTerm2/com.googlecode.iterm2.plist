@@ -424,7 +424,7 @@
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HideTab</key>
-	<true/>
+	<false/>
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
@@ -518,11 +518,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>721 387 599 501 0 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>27 560 918 452 0 0 1680 1028 </string>
+	<string>678 669 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>688 1050 955 1058 685 1050 1920 1058 </string>
+	<string>-1680 0 1680 1028 -1680 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>843 570 570 458 0 0 1680 1028 </string>
+	<string>1390 769 570 458 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>436 510 570 434 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -544,7 +544,7 @@
 	<key>NSWindow Frame iTerm Window 19</key>
 	<string>625 303 570 434 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 570 570 458 0 0 1680 1028 </string>
+	<string>-485 1911 2560 706 -485 1200 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 20</key>
 	<string>646 280 570 434 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 21</key>
@@ -1592,13 +1592,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-27T07:13:03Z</date>
+	<date>2017-12-08T17:54:24Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
-	<true/>
+	<false/>
 	<key>Show Toolbelt</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1658,7 +1658,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.3.beta.1</string>
+	<string>3.1.5.beta.2</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
