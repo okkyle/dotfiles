@@ -1764,7 +1764,7 @@
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HideTab</key>
-	<true/>
+	<false/>
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
@@ -1800,7 +1800,7 @@
 	<key>MinTabWidth</key>
 	<integer>60</integer>
 	<key>NSNavLastRootDirectory</key>
-	<string>/Applications</string>
+	<string>~/Documents/dotfiles/useful-conf/iTerm2-color-scheme</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{1315, 604}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
@@ -1846,25 +1846,25 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>269 574 606 456 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>1304 1167 400 129 0 0 3008 1670 </string>
+	<string>1007 1733 400 129 0 0 3840 2137 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1154 798 700 622 0 0 3008 1670 </string>
+	<string>1330 945 700 621 0 0 3360 1867 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1342 878 918 394 0 0 3840 2138 </string>
+	<string>3705 638 928 394 3360 309 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>686 1082 570 434 0 0 3008 1670 </string>
+	<string>3360 309 1920 1057 3360 309 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1923 56 1914 1029 0 0 3840 2138 </string>
+	<string>3840 247 1080 934 3840 240 1080 1897 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>50 1127 1228 961 0 0 3840 2138 </string>
+	<string>50 1696 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>3840 242 1080 638 3840 240 1080 1920 </string>
+	<string>0 242 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>-1631 61 570 402 -1920 0 1920 1057 </string>
+	<string>700 176 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>-1610 38 570 402 -1920 0 1920 1057 </string>
+	<string>751 116 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>-1589 15 570 402 -1920 0 1920 1057 </string>
+	<string>802 118 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
 	<string>-1568 624 570 402 -1920 0 1920 1057 </string>
 	<key>NeverWarnAboutShortLivedSessions_997E47F7-6467-4862-A26D-E4FCA1E71EB2</key>
@@ -2121,13 +2121,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.062745098039215685</real>
+				<real>0.13333334028720856</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.054901960784313725</real>
+				<real>0.11372549086809158</real>
 				<key>Red Component</key>
-				<real>0.043137254901960784</real>
+				<real>0.047058824449777603</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -2219,9 +2219,9 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
-			<string>Advanced</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -2744,13 +2744,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.13333333333333333</real>
+				<real>0.13333334028720856</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.11372549019607843</real>
+				<real>0.11372549086809158</real>
 				<key>Red Component</key>
-				<real>0.047058823529411764</real>
+				<real>0.047058824449777603</real>
 			</dict>
 			<key>Tags</key>
 			<array/>
@@ -2789,7 +2789,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/Damien</string>
+			<string>/Users/damien</string>
 		</dict>
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
@@ -2972,7 +2972,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-30T18:47:49Z</date>
+	<date>2018-12-09T03:26:39Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2984,7 +2984,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -3038,7 +3038,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.0beta5</string>
+	<string>3.2.6beta4</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
