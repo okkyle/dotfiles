@@ -23,13 +23,17 @@
 }
 
 #nav-bar {
-  box-shadow:0px 0px 24px 0px rgba(0, 0, 0, 0.12) !important;
   border:none !important;
   padding:0px 8px !important;
 }
 
 #bookmarks-menu-button { /* 'Show your bookmarks' toolbar button */
   list-style-image: url('bookmarks.svg') !important;
+}
+
+#navigator-toolbox {
+    box-shadow:0px 0px 20px 0px rgba(0, 0, 0, 0.16) !important;
+      box-shadow:0px 0px 24px 0px rgba(0, 0, 0, 0.2) !important;
 }
 
 #back-button,
@@ -129,13 +133,7 @@ background: transparent !important;
   width:8px !important;
 }
 
-
-
 #PersonalToolbar {
 max-height: none !important; /* Otherwise it's limited to 4em */
 height: 2.5em; /* Just some ridiculous size so you know it works. */
-}
-
-toolbarbutton.bookmark-item[container="true"] .toolbarbutton-icon {
-  display: none !important;
 }
