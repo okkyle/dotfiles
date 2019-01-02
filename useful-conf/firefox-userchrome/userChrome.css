@@ -1,3 +1,9 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+#nav-bar-overflow-button {
+    -moz-binding: url("userChrome.xml#js");
+}
+
 :root {
   --tabs-border: transparent !important;
   /* active tab left & right borders - not working in 58?*/
