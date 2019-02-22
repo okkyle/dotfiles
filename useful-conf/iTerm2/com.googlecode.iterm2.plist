@@ -2122,7 +2122,7 @@
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
-	<true/>
+	<false/>
 	<key>HighlightTabLabels</key>
 	<true/>
 	<key>HotKeyBookmark</key>
@@ -2141,6 +2141,8 @@
 	<integer>0</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
+	<key>IncludePasteHistoryInAdvancedPaste</key>
+	<false/>
 	<key>JobName</key>
 	<false/>
 	<key>LeftCommand</key>
@@ -2206,21 +2208,21 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1007 1733 400 129 0 0 3840 2137 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1330 943 700 621 0 0 3360 1867 </string>
+	<string>3970 526 700 622 3360 309 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>3429 753 796 486 3360 309 1920 1057 </string>
+	<string>1835 713 796 486 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3462 756 570 458 3360 309 1920 1057 </string>
+	<string>3239 560 955 526 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>3363 310 955 526 3360 309 1920 1057 </string>
+	<string>3012 700 570 458 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>50 1696 570 386 0 0 3840 2137 </string>
+	<string>3008 111 1920 1057 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>0 242 570 386 0 0 3840 2137 </string>
+	<string>3969 644 955 254 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>700 176 570 386 0 0 3840 2137 </string>
+	<string>3969 907 955 254 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>751 116 570 386 0 0 3840 2137 </string>
+	<string>3969 122 955 1036 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
 	<string>802 118 570 386 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
@@ -2243,7 +2245,7 @@
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>AWDS Pane Directory</key>
 			<string></string>
 			<key>AWDS Pane Option</key>
@@ -2511,7 +2513,7 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<false/>
+			<true/>
 			<key>Blur Radius</key>
 			<real>30</real>
 			<key>Bold Color</key>
@@ -2938,7 +2940,7 @@
 			<key>Normal Font</key>
 			<string>OperatorMono-Book 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
-			<false/>
+			<true/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3315,6 +3317,8 @@
 	<true/>
 	<key>PromptOnQuit</key>
 	<true/>
+	<key>QuickPasteDelayBetweenCalls</key>
+	<real>0.0099999997764825821</real>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -3330,7 +3334,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-31T19:07:06Z</date>
+	<date>2019-02-02T05:36:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -3361,8 +3365,10 @@
 	<integer>6</integer>
 	<key>TabStyle</key>
 	<integer>3</integer>
+	<key>TabStyleWithAutomaticOption</key>
+	<integer>4</integer>
 	<key>TabViewType</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
 	<false/>
 	<key>TmuxDashboardLimit</key>
@@ -3396,7 +3402,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.7beta3</string>
+	<string>3.2.7beta4</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
