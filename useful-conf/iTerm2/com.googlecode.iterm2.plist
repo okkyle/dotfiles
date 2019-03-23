@@ -2210,9 +2210,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>3970 526 700 622 3360 309 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1835 713 796 486 0 0 3008 1669 </string>
+	<string>4297 923 796 486 3840 579 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3239 560 955 526 3008 111 1920 1057 </string>
+	<string>3840 579 1920 1057 3840 579 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3012 700 570 458 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -3316,7 +3316,7 @@
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
-	<true/>
+	<false/>
 	<key>QuickPasteDelayBetweenCalls</key>
 	<real>0.0099999997764825821</real>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -3334,7 +3334,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-02-02T05:36:02Z</date>
+	<date>2019-03-06T04:57:38Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
