@@ -2086,7 +2086,7 @@
 	<key>Default Bookmark Guid</key>
 	<string>D23027E9-ED9A-45BF-80BC-F91929508BB7</string>
 	<key>DimBackgroundWindows</key>
-	<true/>
+	<false/>
 	<key>DimInactiveSplitPanes</key>
 	<true/>
 	<key>DimOnlyText</key>
@@ -2214,7 +2214,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>814 919 592 584 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4076 932 570 452 3840 579 1920 1057 </string>
+	<string>3840 579 1920 1057 3840 579 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3012 700 570 458 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -3125,7 +3125,7 @@
 			<key>Thin Strokes</key>
 			<integer>0</integer>
 			<key>Transparency</key>
-			<real>0.46127855329949236</real>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Normalization</key>
@@ -3189,7 +3189,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>575150917.81002998</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>8</integer>
+	<integer>9</integer>
 	<key>NoSyncNeverAskAboutSettingAlternateMouseScroll</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
