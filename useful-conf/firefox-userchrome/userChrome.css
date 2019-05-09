@@ -159,6 +159,13 @@ height: 2.5em; /* Just some ridiculous size so you know it works. */
  */
 
 
+
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+  #sidebar-box[sidebarcommand*="tabcenter"] sidebarheader { visibility: collapse !important; }
+}
+
+
 /* Hide traffic lights buttons */
 .titlebar-buttonbox-container {
 /*   padding-right: 20px; */
@@ -168,7 +175,7 @@ height: 2.5em; /* Just some ridiculous size so you know it works. */
 
 /* Hide titlebar spaces */
 .titlebar-spacer {
-  /* display: none; */
+/*   display: none; */
 }
 
 
@@ -178,3 +185,13 @@ height: 2.5em; /* Just some ridiculous size so you know it works. */
 {
   filter: invert(1.0) !important;
 }
+
+
+/* Windows users might also want to consider setting
+ * browser.tabs.drawInTitlebar to false in about:config
+ */
+
+/* #TabsToolbar {
+  visibility: collapse !important;
+} */
+

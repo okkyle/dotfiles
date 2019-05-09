@@ -2088,9 +2088,9 @@
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
-	<true/>
+	<false/>
 	<key>DimOnlyText</key>
-	<true/>
+	<false/>
 	<key>DisableAppNap</key>
 	<true/>
 	<key>DisableFullscreenTransparency</key>
@@ -2103,10 +2103,14 @@
 	<false/>
 	<key>EnableRendezvous</key>
 	<false/>
+	<key>FlashTabBarInFullscreen</key>
+	<true/>
 	<key>FocusFollowsMouse</key>
 	<false/>
 	<key>FsTabDelay</key>
 	<real>1</real>
+	<key>HapticFeedbackForEsc</key>
+	<false/>
 	<key>HiddenAFRStrokeThickness</key>
 	<real>0.0</real>
 	<key>HiddenAdvancedFontRendering</key>
@@ -2118,11 +2122,11 @@
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HideTab</key>
-	<false/>
+	<true/>
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HideTabNumber</key>
-	<false/>
+	<true/>
 	<key>HighlightTabLabels</key>
 	<true/>
 	<key>HotKeyBookmark</key>
@@ -2206,15 +2210,15 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>269 574 606 456 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>4600 1275 400 129 3840 579 1920 1057 </string>
+	<string>4533 1152 400 129 3840 579 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1220 1083 700 622 0 0 3840 2137 </string>
+	<string>1330 945 700 622 0 0 3360 1867 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>4297 923 796 486 3840 579 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>814 919 592 584 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3840 579 1920 1057 3840 579 1920 1057 </string>
+	<string>3360 309 1920 1057 3360 309 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3012 700 570 458 3008 111 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -2483,13 +2487,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.062745101749897003</real>
+				<real>0.062745098039215685</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.062745101749897003</real>
+				<real>0.062745098039215685</real>
 				<key>Red Component</key>
-				<real>0.062745101749897003</real>
+				<real>0.062745098039215685</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -3149,7 +3153,7 @@
 			<key>Use Underline Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.0878936346754968</real>
+			<real>1.0900000000000001</real>
 			<key>Visual Bell</key>
 			<false/>
 			<key>Window Type</key>
@@ -3180,16 +3184,16 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{3840, 579}, {1920, 1080}}</string>
+		<string>{{3360, 309}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{4650, 1563}</string>
+		<string>{4071, 1124}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>F13091B0-8D9E-4AC8-BEA0-0CCADDFC2CF8</string>
 	<key>NoSyncLastTipTime</key>
-	<real>575150917.81002998</real>
+	<real>575691107.30502796</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>9</integer>
+	<integer>49</integer>
 	<key>NoSyncNeverAskAboutSettingAlternateMouseScroll</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
@@ -3204,6 +3208,17 @@
 	<true/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
+		<key>0</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>id</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
 		<key>1</key>
 		<array>
 			<dict>
@@ -3656,7 +3671,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.path</string>
+				<string>currentSession.terminalWindowName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3688,7 +3703,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.terminalWindowName</string>
+				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3712,7 +3727,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>currentSession.pid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3752,7 +3767,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.pid</string>
+				<string>currentSession.path</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3863,6 +3878,11 @@
 		<string>0070</string>
 		<string>0071</string>
 		<string>0072</string>
+		<string>0073</string>
+		<string>0074</string>
+		<string>0075</string>
+		<string>0076</string>
+		<string>0077</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
@@ -3921,6 +3941,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/damien/Documents/dotfiles/useful-conf/iTerm2</string>
+	<key>PreserveWindowSizeWhenTabBarVisibilityChanges</key>
+	<true/>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnClose</key>
@@ -3944,8 +3966,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-03-24T21:53:23Z</date>
+	<date>2019-04-26T20:40:45Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
@@ -3963,8 +3987,10 @@
 	<true/>
 	<key>SmartPlacement</key>
 	<true/>
+	<key>SoundForEsc</key>
+	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.19341755319148937</real>
+	<real>0.10000000000000001</real>
 	<key>StatusBarPosition</key>
 	<integer>0</integer>
 	<key>StretchTabsToFillBar</key>
@@ -3988,7 +4014,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1553464704</real>
+	<real>1553649536</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -3999,12 +4025,14 @@
 	<true/>
 	<key>UseUnevenTabs</key>
 	<true/>
+	<key>VisualIndicatorForEsc</key>
+	<false/>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
 	<string>.AppleSystemUIFont</string>
 	<key>WindowNumber</key>
-	<false/>
+	<true/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
@@ -4018,7 +4046,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.0beta1</string>
+	<string>3.3.0beta4</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
