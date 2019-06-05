@@ -1,3 +1,0 @@
-/**
- * userChrome.js hacks
- */
