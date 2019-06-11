@@ -1,0 +1,85 @@
+# Default Shortcut 	Description
+# mod1 	option + shift
+# mod2 	ctrl + option + shift
+
+# Focus
+shift + alt - insert : chunkc tiling::window --focus prev
+shift + alt - pageup : chunkc tiling::window --focus next
+
+shift + alt - home : chunkc tiling::window --focus north
+shift + alt - end : chunkc tiling::window --focus south
+shift + alt - delete : chunkc tiling::window --focus west
+shift + alt - pagedown : chunkc tiling::window --focus east
+
+# Move to desktop
+ctrl + alt + shift - left : chunkc tiling::window --send-to-desktop prev; chunkc tiling::desktop -f prev
+ctrl + alt + shift - right : chunkc tiling::window --send-to-desktop next; chunkc tiling::desktop -f next
+
+# Swap windows
+ctrl + alt + cmd - left : chunkc tiling::window --swap west;
+ctrl + alt + cmd - right : chunkc tiling::window --swap east;
+ctrl + alt + cmd - down : chunkc tiling::window --swap south;
+ctrl + alt + cmd - up : chunkc tiling::window --swap north;
+# Warp windows
+cmd + alt + shift - left : chunkc tiling::window --warp west;
+cmd + alt + shift - right : chunkc tiling::window --warp east;
+cmd + alt + shift - down : chunkc tiling::window --warp south;
+cmd + alt + shift - up : chunkc tiling::window --warp north;
+
+# Toggle float
+shift + alt - t : chunkc tiling::window --toggle float;
+shift + alt - f : chunkc tiling::window --toggle fullscreen;
+shift + alt - s : chunkc tiling::window --toggle sticky;
+# shift + alt - q : chunkc tiling::window --toggle fade;
+
+# rotate tree
+ctrl + alt + cmd - r : chunkc tiling::desktop --rotate 90
+
+# mirror tree y-axis
+ctrl + alt + cmd - y : chunkc tiling::desktop --mirror vertical
+
+# mirror tree x-axis
+ctrl + alt + cmd - x : chunkc tiling::desktop --mirror horizontal
+
+# fast focus desktop
+# cmd + ctrl - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+cmd + ctrl - left : chunkc tiling::desktop --focus prev
+cmd + ctrl - right : chunkc tiling::desktop --focus next
+
+cmd + ctrl - 0x33 : chunkc tiling::desktop --annihilate
+
+# create desktop, move window and follow focus
+cmd + ctrl - m : chunkc tiling::desktop --create;\
+                  id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
+                  chunkc tiling::window --send-to-desktop $(echo ${id##* });\
+                  chunkc tiling::desktop --focus $(echo ${id##* })
+# create desktop and follow focus
+cmd + ctrl - n : chunkc tiling::desktop --create;\
+                id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
+                chunkc tiling::desktop --focus $(echo ${id##* })
+
+
+# set insertion point for focused container
+ctrl + alt - escape : chunkc tiling::window --use-insertion-point cancel
+ctrl + alt - left : chunkc tiling::window --use-insertion-point west
+ctrl + alt - down : chunkc tiling::window --use-insertion-point south
+ctrl + alt - up : chunkc tiling::window --use-insertion-point north
+ctrl + alt - right : chunkc tiling::window --use-insertion-point east
+
+
+# increase region size
+
+hyper - left : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
+hyper - down : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
+hyper - up : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
+hyper - right : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
+
+
+# Increase padding
+alt + ctrl + cmd - 0x1B : chunkc tiling::desktop --padding inc
+
+# Decrease padding
+alt + ctrl + cmd - 0x18 : chunkc tiling::desktop --padding dec
+
+# Toggle offset
+alt + ctrl + cmd - 0 : chunkc tiling::desktop --toggle offset
