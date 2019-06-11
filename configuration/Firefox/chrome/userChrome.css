@@ -107,6 +107,7 @@
 /* Hide bookmark button, page actions, security labels and extension icons */
 #star-button-box,
 #pageActionButton,
+#blocked-permissions-container,
 #identity-icon-labels,
 #extension-icon {
   display: none !important;

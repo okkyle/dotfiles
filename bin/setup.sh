@@ -81,7 +81,7 @@ function install_homebrew() {
 }
 
 function install_packages_with_brewfile() {
-  BREW_FILE_PATH="/macos.brewfile"
+  BREW_FILE_PATH="./macos.brewfile"
   info "Installing packages within ${BREW_FILE_PATH}"
   if brew bundle check --file="$BREW_FILE_PATH" &>/dev/null; then
     success "Brewfile's dependencies are already satisfied "
@@ -98,13 +98,11 @@ function install_packages_with_brewfile() {
 function setup_macOS_defaults() {
   info "Updating macOS defaults"
 
-  current_dir=$(pwd)
-  cd ${DOTFILES_REPO}/macos/setup-defaults.sh
-  if bash defaults.sh; then
-    cd $current_dir
+  if bash ./macos/setup-defaults.sh; then
+    cd $(pwd)
     success "macOS defaults updated successfully"
   else
-    cd $current_dir
+    cd $(pwd)
     print_error "macOS defaults update failed"
     exit 1
   fi
