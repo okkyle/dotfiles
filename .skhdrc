@@ -1,3 +1,5 @@
+:: default : chunkc border::color 0xff5a5a5a
+
 # Default Shortcut 	Description
 # mod1 	option + shift
 # mod2 	ctrl + option + shift
@@ -70,14 +72,6 @@ ctrl + alt - up : chunkc tiling::window --use-insertion-point north
 ctrl + alt - right : chunkc tiling::window --use-insertion-point east
 
 
-# increase region size
-
-hyper - left : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
-hyper - down : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
-hyper - up : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
-hyper - right : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east; chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
-
-
 # Increase padding
 ctrl + alt + cmd - 0x1B : chunkc tiling::desktop --padding inc
 
@@ -87,3 +81,28 @@ ctrl + alt + cmd - 0x18 : chunkc tiling::desktop --padding dec
 # Toggle offset
 ctrl + alt + cmd - 0 : chunkc tiling::desktop --toggle offset
 
+# Remove border when doing a screenshot
+cmd + shift - 4 -> : chunkc border::clear
+
+# defines a new mode 'resize' with an on_enter command, that captures keypresses
+:: resize @ : chunkc border::color 0xff24ccaa
+
+# from 'default' mode, activate mode 'resize'
+# (this is the key combination you want to use to enter resize mode)
+ctrl + alt - r ; resize 
+
+# from 'resize' mode, activate mode 'default'
+# (this is the keypress required to leave resize mode)
+resize < ctrl + alt - r ; default
+
+# increase region size
+resize < ctrl - left : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+resize < ctrl - down : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
+resize < ctrl - up : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
+resize < ctrl - right : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+
+# decrease
+resize < alt - right : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+resize < alt - up : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+resize < alt - down : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
+resize < alt - left : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
