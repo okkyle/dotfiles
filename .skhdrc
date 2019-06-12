@@ -16,9 +16,12 @@ shift + alt - end : chunkc tiling::window --focus south
 shift + alt - delete : chunkc tiling::window --focus west
 shift + alt - pagedown : chunkc tiling::window --focus east
 
+# Move to monitor
+ctrl + alt - left : chunkc tiling::window --send-to-monitor next;
+ctrl + alt - right : chunkc tiling::window --send-to-monitor prev;
 # Move to desktop
-ctrl + alt + shift - left : chunkc tiling::window --send-to-desktop prev; chunkc tiling::desktop -f prev
-ctrl + alt + shift - right : chunkc tiling::window --send-to-desktop next; chunkc tiling::desktop -f next
+shift + ctrl + alt - left : chunkc tiling::window --send-to-desktop next;
+shift + ctrl + alt - right : chunkc tiling::window --send-to-desktop prev;
 
 # Swap windows
 ctrl + alt + cmd - left : chunkc tiling::window --swap west;
