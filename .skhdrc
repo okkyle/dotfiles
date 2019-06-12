@@ -2,6 +2,9 @@
 # mod1 	option + shift
 # mod2 	ctrl + option + shift
 
+# order 
+# shift + ctrl + alt + cmd
+
 # Focus
 shift + alt - insert : chunkc tiling::window --focus prev
 shift + alt - pageup : chunkc tiling::window --focus next
@@ -21,10 +24,10 @@ ctrl + alt + cmd - right : chunkc tiling::window --swap east;
 ctrl + alt + cmd - down : chunkc tiling::window --swap south;
 ctrl + alt + cmd - up : chunkc tiling::window --swap north;
 # Warp windows
-cmd + alt + shift - left : chunkc tiling::window --warp west;
-cmd + alt + shift - right : chunkc tiling::window --warp east;
-cmd + alt + shift - down : chunkc tiling::window --warp south;
-cmd + alt + shift - up : chunkc tiling::window --warp north;
+shift + alt + cmd - left : chunkc tiling::window --warp west;
+shift + alt + cmd - right : chunkc tiling::window --warp east;
+shift + alt + cmd - down : chunkc tiling::window --warp south;
+shift + alt + cmd - up : chunkc tiling::window --warp north;
 
 # Toggle float
 shift + alt - t : chunkc tiling::window --toggle float;
@@ -43,18 +46,18 @@ ctrl + alt + cmd - x : chunkc tiling::desktop --mirror horizontal
 
 # fast focus desktop
 # cmd + ctrl - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
-cmd + ctrl - left : chunkc tiling::desktop --focus prev
-cmd + ctrl - right : chunkc tiling::desktop --focus next
+ctrl + cmd - left : chunkc tiling::monitor -f prev
+ctrl + cmd - right : chunkc tiling::monitor -f next
 
-cmd + ctrl - 0x33 : chunkc tiling::desktop --annihilate
+ctrl + cmd - 0x33 : chunkc tiling::desktop --annihilate
 
 # create desktop, move window and follow focus
-cmd + ctrl - m : chunkc tiling::desktop --create;\
+ctrl + cmd - m : chunkc tiling::desktop --create;\
                   id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
                   chunkc tiling::window --send-to-desktop $(echo ${id##* });\
                   chunkc tiling::desktop --focus $(echo ${id##* })
 # create desktop and follow focus
-cmd + ctrl - n : chunkc tiling::desktop --create;\
+ctrl + cmd - n : chunkc tiling::desktop --create;\
                 id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
                 chunkc tiling::desktop --focus $(echo ${id##* })
 
@@ -76,10 +79,11 @@ hyper - right : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-windo
 
 
 # Increase padding
-alt + ctrl + cmd - 0x1B : chunkc tiling::desktop --padding inc
+ctrl + alt + cmd - 0x1B : chunkc tiling::desktop --padding inc
 
 # Decrease padding
-alt + ctrl + cmd - 0x18 : chunkc tiling::desktop --padding dec
+ctrl + alt + cmd - 0x18 : chunkc tiling::desktop --padding dec
 
 # Toggle offset
-alt + ctrl + cmd - 0 : chunkc tiling::desktop --toggle offset
+ctrl + alt + cmd - 0 : chunkc tiling::desktop --toggle offset
+
