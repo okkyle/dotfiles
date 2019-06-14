@@ -99,13 +99,13 @@ ctrl + alt - r ; resize
 resize < ctrl + alt - r ; default
 
 # increase region size
-resize < ctrl - left : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
-resize < ctrl - down : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
-resize < ctrl - up : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
-resize < ctrl - right : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+resize < ctrl - left : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
+resize < ctrl - down : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south
+resize < ctrl - up : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north
+resize < ctrl - right : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east
 
 # decrease
-resize < alt - right : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
-resize < alt - up : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
-resize < alt - down : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
-resize < alt - left : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+resize < alt - right : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
+resize < alt - up : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
+resize < alt - down : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
+resize < alt - left : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
