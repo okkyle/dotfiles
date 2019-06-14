@@ -125,6 +125,7 @@ chunkc set mouse_move_window \"ctrl 1\"
 chunkc set mouse_resize_window \"ctrl alt 1\"
 chunkc set mouse_motion_interval 35
 
+
 #
 # NOTE: sample rules for the tiling plugin
 #
