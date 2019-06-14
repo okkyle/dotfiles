@@ -86,6 +86,7 @@ ctrl + alt + cmd - 0 : chunkc tiling::desktop --toggle offset
 
 # Remove border when doing a screenshot
 cmd + shift - 4 -> : chunkc border::clear
+alt - escape : chunkc border::clear
 
 # defines a new mode 'resize' with an on_enter command, that captures keypresses
 :: resize @ : chunkc border::color 0xff24ccaa
