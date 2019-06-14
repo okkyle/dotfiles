@@ -75,10 +75,10 @@ ctrl + alt - up : chunkc tiling::window --use-insertion-point north
 ctrl + alt - right : chunkc tiling::window --use-insertion-point east
 
 
-# Increase padding
+# Increase padding (-)
 ctrl + alt + cmd - 0x1B : chunkc tiling::desktop --padding inc
 
-# Decrease padding
+# Decrease padding (+)
 ctrl + alt + cmd - 0x18 : chunkc tiling::desktop --padding dec
 
 # Toggle offset
@@ -93,11 +93,11 @@ alt - escape : chunkc border::clear
 
 # from 'default' mode, activate mode 'resize'
 # (this is the key combination you want to use to enter resize mode)
-ctrl + alt - r ; resize 
+ctrl - escape ; resize 
 
 # from 'resize' mode, activate mode 'default'
 # (this is the keypress required to leave resize mode)
-resize < ctrl + alt - r ; default
+resize < escape ; default
 
 # increase region size
 resize < ctrl - left : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
