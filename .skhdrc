@@ -37,7 +37,6 @@ shift + alt + cmd - up : chunkc tiling::window --warp north;
 # Toggle float
 shift + alt - t : chunkc tiling::window --toggle float;
 shift + alt - f : chunkc tiling::window --toggle fullscreen;
-shift + alt - s : chunkc tiling::window --toggle sticky;
 # shift + alt - q : chunkc tiling::window --toggle fade;
 
 # rotate tree
