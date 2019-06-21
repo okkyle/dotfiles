@@ -1909,7 +1909,7 @@
 			<key>Thin Strokes</key>
 			<integer>0</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.091174254441624358</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Normalization</key>
@@ -2943,7 +2943,7 @@
 			<key>Thin Strokes</key>
 			<integer>0</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.084589149746192902</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Normalization</key>
@@ -3977,7 +3977,7 @@
 			<key>Thin Strokes</key>
 			<integer>0</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.081983661167512697</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Normalization</key>
@@ -5011,7 +5011,7 @@
 			<key>Thin Strokes</key>
 			<integer>0</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.074738261421319799</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unicode Normalization</key>
@@ -5081,7 +5081,7 @@
 		<key>screenFrame</key>
 		<string>{{3840, 215}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{3995, 1068}</string>
+		<string>{4755, 1052}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>F13091B0-8D9E-4AC8-BEA0-0CCADDFC2CF8</string>
