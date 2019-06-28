@@ -1,94 +1,88 @@
-:: default : chunkc border::color 0xff5a5a5a
+:: default : yabai -m config active_window_border_color 0xff5a5a5a;
 
-# Default Shortcut 	Description
-# mod1 	option + shift
-# mod2 	ctrl + option + shift
-
-# order 
-# shift + ctrl + alt + cmd
 
 # Focus
-shift + alt - insert : chunkc tiling::window --focus prev
-shift + alt - pageup : chunkc tiling::window --focus next
+shift + alt - home : yabai -m window --focus north
+shift + alt - end : yabai -m window --focus south
+shift + alt - delete : yabai -m window --focus west
+shift + alt - pagedown : yabai -m window --focus east
 
-shift + alt - home : chunkc tiling::window --focus north
-shift + alt - end : chunkc tiling::window --focus south
-shift + alt - delete : chunkc tiling::window --focus west
-shift + alt - pagedown : chunkc tiling::window --focus east
+alt + shift - return : osascript -e 'tell application "iTerm" to create window with default profile'
 
 # Move to monitor
-shift + ctrl + alt - left : chunkc tiling::window --send-to-monitor next;
-shift + ctrl + alt - right : chunkc tiling::window --send-to-monitor prev;
-# Move to desktop
-# shift + ctrl + alt - left : chunkc tiling::window --send-to-desktop next;
-# shift + ctrl + alt - right : chunkc tiling::window --send-to-desktop prev;
+shift + ctrl + alt - left : yabai -m window --display next;
+shift + ctrl + alt - right : yabai -m window --display prev;
+
 
 # Swap windows
-ctrl + alt + cmd - left : chunkc tiling::window --swap west;
-ctrl + alt + cmd - right : chunkc tiling::window --swap east;
-ctrl + alt + cmd - down : chunkc tiling::window --swap south;
-ctrl + alt + cmd - up : chunkc tiling::window --swap north;
+ctrl + alt + cmd - left : yabai -m window --swap west;
+ctrl + alt + cmd - right : yabai -m window --swap east;
+ctrl + alt + cmd - down : yabai -m window --swap south;
+ctrl + alt + cmd - up : yabai -m window --swap north;
 # Warp windows
-shift + alt + cmd - left : chunkc tiling::window --warp west;
-shift + alt + cmd - right : chunkc tiling::window --warp east;
-shift + alt + cmd - down : chunkc tiling::window --warp south;
-shift + alt + cmd - up : chunkc tiling::window --warp north;
+shift + alt + cmd - left : yabai -m window --warp west;
+shift + alt + cmd - right : yabai -m window --warp east;
+shift + alt + cmd - down : yabai -m window --warp south;
+shift + alt + cmd - up : yabai -m window --warp north;
 
 # Toggle float
-shift + alt - t : chunkc tiling::window --toggle float;
-shift + alt - f : chunkc tiling::window --toggle fullscreen;
-# shift + alt - q : chunkc tiling::window --toggle fade;
+shift + alt - t : yabai -m window --toggle float;
+shift + alt - e : yabai -m window --toggle split;
+shift + alt - f : yabai -m window --toggle zoom-fullscreen;
+shift + alt - d : yabai -m window --toggle zoom-parent;
 
 # rotate tree
-ctrl + alt + cmd - r : chunkc tiling::desktop --rotate 90
+ctrl + alt + cmd - r : yabai -m space --rotate 90
 
 # mirror tree y-axis
-ctrl + alt + cmd - y : chunkc tiling::desktop --mirror vertical
+ctrl + alt + cmd - y : yabai -m space --mirror y-axis
 
 # mirror tree x-axis
-ctrl + alt + cmd - x : chunkc tiling::desktop --mirror horizontal
+ctrl + alt + cmd - x : yabai -m space --mirror x-axis
 
-# fast focus desktop
-# cmd + ctrl - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
-ctrl + cmd - left : chunkc tiling::monitor -f prev
-ctrl + cmd - right : chunkc tiling::monitor -f next
-
-ctrl + cmd - 0x33 : chunkc tiling::desktop --annihilate
+# fast focus monitor
+ctrl + cmd - left : yabai -m display --focus prev
+ctrl + cmd - right : yabai -m display --focus next
 
 # create desktop, move window and follow focus
-ctrl + cmd - m : chunkc tiling::desktop --create;\
-                  id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
-                  chunkc tiling::window --send-to-desktop $(echo ${id##* });\
-                  chunkc tiling::desktop --focus $(echo ${id##* })
+ctrl + cmd - m : yabai -m space --create;\
+                  id=$(yabai -m query --displays --display | grep "spaces");\
+                  yabai -m window --space $(echo ${id:10:${#id}-10});\
+                  yabai -m space --focus $(echo ${id:10:${#id}-10})
+
 # create desktop and follow focus
-ctrl + cmd - n : chunkc tiling::desktop --create;\
-                id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
-                chunkc tiling::desktop --focus $(echo ${id##* })
+ctrl + cmd - n: yabai -m space --create;\
+                id=$(yabai -m query --displays --display | grep "spaces");\
+yabai -m space --focus $(echo ${id:10:${#id}-10})
 
 
-# set insertion point for focused container
-ctrl + alt - escape : chunkc tiling::window --use-insertion-point cancel
-ctrl + alt - left : chunkc tiling::window --use-insertion-point west
-ctrl + alt - down : chunkc tiling::window --use-insertion-point south
-ctrl + alt - up : chunkc tiling::window --use-insertion-point north
-ctrl + alt - right : chunkc tiling::window --use-insertion-point east
-
+# set insertion point in focused container
+ctrl + alt - escape : yabai -m window --insert cancel
+ctrl + alt - left : yabai -m window --insert west
+ctrl + alt - down : yabai -m window --insert south
+ctrl + alt - up : yabai -m window --insert north
+ctrl + alt - right : yabai -m window --insert east
 
 # Increase padding (-)
-ctrl + alt + cmd - 0x1B : chunkc tiling::desktop --padding inc
+ctrl + alt + cmd - 0x1B : yabai -m space --padding rel:20:20:20:20
+
 
 # Decrease padding (+)
-ctrl + alt + cmd - 0x18 : chunkc tiling::desktop --padding dec
+ctrl + alt + cmd - 0x18 : yabai -m space --padding rel:-20:-20:-20:-20
+
+# "Focus" mode
+ctrl + alt + cmd - 9 : yabai -m space --padding abs:140:140:140:140
 
 # Toggle offset
-ctrl + alt + cmd - 0 : chunkc tiling::desktop --toggle offset
+ctrl + alt + cmd - 0 : yabai -m space --toggle padding; yabai -m space --toggle gap;
 
 # Remove border when doing a screenshot
-cmd + shift - 4 -> : chunkc border::clear
-alt - escape : chunkc border::clear
+cmd + shift - 4 -> : yabai -m window --toggle border
+
+alt - escape : yabai -m window --toggle border
 
 # defines a new mode 'resize' with an on_enter command, that captures keypresses
-:: resize @ : chunkc border::color 0xff24ccaa
+:: resize @ : yabai -m config active_window_border_color 0xff24ccaa
 
 # from 'default' mode, activate mode 'resize'
 # (this is the key combination you want to use to enter resize mode)
@@ -98,14 +92,22 @@ ctrl - escape ; resize
 # (this is the keypress required to leave resize mode)
 resize < escape ; default
 
-# increase region size
-resize < ctrl - left : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
-resize < ctrl - down : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south
-resize < ctrl - up : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north
-resize < ctrl - right : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east
+# equalize windows
+resize < ctrl - 0 : yabai -m space --balance
 
-# decrease
-resize < alt - right : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
-resize < alt - up : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
-resize < alt - down : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
-resize < alt - left : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
+# increase window size
+resize < ctrl - left : yabai -m window --resize left:-100:0
+resize < ctrl - down : yabai -m window --resize bottom:0:100
+resize < ctrl - up : yabai -m window --resize top:0:-100
+resize < ctrl - right : yabai -m window --resize right:100:0
+
+# decrease window size
+resize < alt - right : yabai -m window --resize left:100:0
+resize < alt - up : yabai -m window --resize bottom:0:-100
+resize < alt - down : yabai -m window --resize top:0:100
+resize < alt - left : yabai -m window --resize right:-100:0
+
+
+
+# Restart yabai
+shift + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
