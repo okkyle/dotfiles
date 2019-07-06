@@ -4,6 +4,10 @@
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
+toolbarbutton#alltabs-button {
+  -moz-binding: url("userChrome.xml#js");
+}
+
 :root {
   --tabs-border: transparent !important;
   /* active tab left & right borders - not working in 58?*/
@@ -175,6 +179,30 @@
 
 #main-window[titlepreface^="[1] "] #TabsToolbar {
   min-height: 0 !important;
+}
+
+#navigator-toolbox[readeractive="true"] {
+  box-shadow: none !important;
+}
+
+#navigator-toolbox[readeractive="true"]::after {
+  height: 0 !important;
+}
+
+#reader-mode-button {
+  opacity: 0 !important;
+  visibility: collapse !important;
+}
+
+#reader-mode-button[readeractive="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#pageActionSeparator {
+  opacity: 0 !important;
+  margin-right: 2px !important;
+  margin-left: 2px !important;
 }
 
 
