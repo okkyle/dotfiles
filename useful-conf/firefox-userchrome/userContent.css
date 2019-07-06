@@ -1,0 +1,18 @@
+@-moz-document url-prefix(about:reader) {
+  
+  body.dark {
+    background-color: #323234 !important;
+  }
+  
+  .toolbar {
+    background-color: transparent !important;
+    border-right: 0 !important;
+    border: 0 !important;
+/*     border-color: var(--in-content-box-border-color) !important; */
+  }
+
+  .toolbar .button {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+}
