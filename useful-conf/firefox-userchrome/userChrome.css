@@ -209,5 +209,5 @@ toolbarbutton#alltabs-button {
 /* Move traffic lights in the space carved above. */
 .titlebar-buttonbox-container {
   position: absolute;
-  margin-top: -36px
+  margin-top: -40px
 }
