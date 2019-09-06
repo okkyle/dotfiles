@@ -55,10 +55,24 @@ toolbarbutton#alltabs-button {
 
 /* Hide/re-order the menu button. */
 #PanelUI-button {
-  display: none !important;
+  overflow: hidden;
+  width: 0;
+/*   display: none !important; */
 }
 
-#PanelUI-button,
+#appMenu-notification-popup {
+/*   position: fixed; */
+  margin-top: 90px;
+  margin-right: 20px !important;
+}
+
+#appMenu-notification-popup .panel-arrowbox {
+  display: none !important;
+  visibility: collapse;
+  
+}
+
+/* #PanelUI-button, */
 #customization-panel-container,
 #customization-panelWrapper .panel-arrow {
   -moz-box-ordinal-group: 0 !important;
