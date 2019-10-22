@@ -219,9 +219,14 @@ toolbarbutton#alltabs-button {
   margin-left: 2px !important;
 }
 
+#tracking-protection-icon-container {
+  border-image-slice: initial;
+  padding: 0 4px;
+}
+
 
 /* Move traffic lights in the space carved above. */
 .titlebar-buttonbox-container {
   position: absolute;
-  margin-top: -40px
+  margin-top: -42px
 }
